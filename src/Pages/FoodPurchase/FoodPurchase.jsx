@@ -36,7 +36,7 @@ const FoodPurchase = () => {
     const quantity = food.quantity;
     const buyerName = user.displayName;
     const buyDate = fullDate;
-    const quantityBought = form.quantityBought.value;
+    const quantityBought = parseFloat(form.quantityBought.value);
     if (user?.email === sellerEmail)
       return toast.error("Cannot Order Your Own Products");
     if (quantityBought > quantity)

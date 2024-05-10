@@ -13,12 +13,12 @@ const FoodAdd = () => {
     const foodCategory = form.foodCategory.value;
     const foodOrigin = form.foodOrigin.value;
     const description = form.description.value;
-    const quantity = form.quantity.value;
+    const quantity = parseFloat(form.quantity.value);
     const price = form.price.value;
     const sellerEmail = user.email;
     const sellerName = user.displayName;
     const sellerPhoto = user.photoURL;
-    const count = 0;
+    const count = parseFloat(0);
 
     const newFood = {
       foodName,
