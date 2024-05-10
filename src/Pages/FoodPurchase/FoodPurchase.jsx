@@ -37,6 +37,8 @@ const FoodPurchase = () => {
     const buyerName = user.displayName;
     const buyDate = fullDate;
     const quantityBought = form.quantityBought.value;
+    if (user?.email === sellerEmail)
+      return toast.error("Cannot Order Your Own Products");
     if (quantityBought > quantity)
       return toast.error("Cannot Order More Than Available Quantity");
     const purchaseData = {
@@ -164,6 +166,7 @@ const FoodPurchase = () => {
               id="quantityBought"
               name="quantityBought"
               type="number"
+              required
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
             />
           </div>

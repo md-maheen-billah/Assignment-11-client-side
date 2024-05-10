@@ -133,7 +133,7 @@ const Navbar = () => {
         </label>
         {user && user.photoURL ? (
           <>
-            <div className="dropdown dropdown-hover ">
+            <div className="dropdown">
               <div
                 tabIndex={0}
                 role="button"
@@ -149,10 +149,22 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="mt-3 z-[20] p-2 shadow menu menu-sm dropdown-content bg-[#f9a06f] font-semibold  text-[#1e1b4b]  w-40 right-2 lg:right-[-55px] rounded-box "
+                className="mt-3 z-[20] p-2 shadow menu menu-sm dropdown-content bg-[#f9a06f] font-semibold  text-[#1e1b4b]  w-52 right-2 lg:right-[-55px] rounded-box "
               >
                 <li>
-                  <a className="justify-between">{user.displayName}</a>
+                  <Link to="/food-add" className="justify-between">
+                    My added food items
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/food-add" className="justify-between">
+                    Add a food item
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/food-add" className="justify-between">
+                    My ordered food items
+                  </Link>
                 </li>
                 <li className="lg:hidden">
                   <div className="flex justify-center">

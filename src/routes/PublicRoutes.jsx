@@ -7,6 +7,7 @@ import Root from "../layouts/Root/Root";
 import PrivateRoute from "./PrivateRoute";
 import FoodDetails from "../Pages/FoodDetails/FoodDetails";
 import FoodPurchase from "../Pages/FoodPurchase/FoodPurchase";
+import FoodAdd from "../Pages/FoodAdd/FoodAdd";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <FoodPurchase></FoodPurchase>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/food-add",
+        element: (
+          <PrivateRoute>
+            <FoodAdd></FoodAdd>
           </PrivateRoute>
         ),
       },

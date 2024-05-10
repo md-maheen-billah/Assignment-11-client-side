@@ -22,6 +22,13 @@ const Home = () => {
         .map((food) => (
           <div className="border-2 border-red-400" key={food._id}>
             <p>{food.foodName}</p>
+            <img src={food.foodImage} width="100" alt="" />
+            <img
+              className="rounded-full"
+              src={food.sellerPhoto}
+              width="40"
+              alt=""
+            />
             <p>Quantity: {food.quantity}</p>
             <p>Purchased Time: {food.count}</p>
             <Link to={`/food-details/${food._id}`}>
