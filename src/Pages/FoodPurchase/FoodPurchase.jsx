@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 import axios from "axios";
 
 const FoodPurchase = () => {
@@ -50,11 +51,25 @@ const FoodPurchase = () => {
         `${import.meta.env.VITE_API_URL}/purchases`,
         purchaseData
       );
-      console.log(data);
+      if (data?.insertedId) {
+        toast.success("Ordered Successfully");
+      }
     } catch (err) {
       console.log(err);
       console.log("Hi, i am error", err.message);
     }
+
+    fetch(`${import.meta.env.VITE_API_URL}/purchase-changes/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(purchaseData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   };
   return (
     <div>

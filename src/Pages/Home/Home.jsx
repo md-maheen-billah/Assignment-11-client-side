@@ -16,7 +16,7 @@ const Home = () => {
       <h2>This is home</h2>
       {foods
         .sort((a, b) => {
-          return b.quantity - a.quantity;
+          return b.count - a.count;
         })
         .slice(0, 6)
         .map((food) => (
