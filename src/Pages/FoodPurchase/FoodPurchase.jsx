@@ -1,5 +1,7 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const FoodPurchase = () => {
   const { user } = useContext(AuthContext);
@@ -8,6 +10,18 @@ const FoodPurchase = () => {
   let month = date.getMonth() + 1;
   let year = date.getFullYear();
   let fullDate = `${day}/${month}/${year}`;
+
+  const { id } = useParams();
+  const [food, setFood] = useState({});
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await axios(
+        `${import.meta.env.VITE_API_URL}/food-details/${id}`
+      );
+      setFood(data);
+    };
+    getData();
+  }, [id]);
   return (
     <div>
       <h2>This is Food Purchase Page</h2>
@@ -62,6 +76,7 @@ const FoodPurchase = () => {
               <input
                 id="foodName"
                 name="foodName"
+                defaultValue={food.foodName}
                 type="text"
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
               />
@@ -86,7 +101,7 @@ const FoodPurchase = () => {
 
           <div className="flex justify-end mt-6">
             <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-              Save
+              Purchase
             </button>
           </div>
         </form>
