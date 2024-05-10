@@ -26,15 +26,19 @@ const FoodPurchase = () => {
 
   const handlePurchase = async (e) => {
     e.preventDefault();
+    const form = e.target;
     const foodName = food.foodName;
     const price = food.price;
     const foodImage = food.foodImage;
     const sellerName = food.sellerName;
     const sellerEmail = food.sellerEmail;
     const buyerEmail = user.email;
+    const quantity = food.quantity;
     const buyerName = user.displayName;
     const buyDate = fullDate;
-
+    const quantityBought = form.quantityBought.value;
+    if (quantityBought > quantity)
+      return toast.error("Cannot Order More Than Available Quantity");
     const purchaseData = {
       foodName,
       price,
@@ -44,6 +48,7 @@ const FoodPurchase = () => {
       buyerEmail,
       buyerName,
       buyDate,
+      quantityBought,
     };
 
     try {
@@ -64,7 +69,7 @@ const FoodPurchase = () => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(purchaseData),
+      body: JSON.stringify({ quantityBought }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -146,6 +151,21 @@ const FoodPurchase = () => {
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
               />
             </div>
+          </div>
+
+          <div>
+            <label
+              className="text-gray-700 dark:text-gray-200"
+              htmlFor="quantityBought"
+            >
+              Quantity
+            </label>
+            <input
+              id="quantityBought"
+              name="quantityBought"
+              type="number"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+            />
           </div>
 
           <div className="flex justify-end mt-6">
