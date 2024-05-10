@@ -4,6 +4,9 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Root from "../layouts/Root/Root";
+import PrivateRoute from "./PrivateRoute";
+import FoodDetails from "../Pages/FoodDetails/FoodDetails";
+import FoodPurchase from "../Pages/FoodPurchase/FoodPurchase";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +25,22 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/food-details/:id",
+        element: (
+          <PrivateRoute>
+            <FoodDetails></FoodDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/food-purchase/:id",
+        element: (
+          <PrivateRoute>
+            <FoodPurchase></FoodPurchase>
+          </PrivateRoute>
+        ),
       },
     ],
   },

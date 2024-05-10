@@ -1,5 +1,4 @@
 import { Link, NavLink } from "react-router-dom";
-import { FaPaintBrush } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
 
 import toast from "react-hot-toast";
@@ -97,9 +96,8 @@ const Navbar = () => {
             {navLinks2}
           </ul>
         </div>
-        <button className="btn btn-ghost text-2xl font-extrabold dark:text-[#fff4ed] text-[#1e1b4b] p-0 ">
-          Canvas <span className="text-[#f9a06f]">Isle</span>{" "}
-          <FaPaintBrush className="text-[#f9a06f]" />
+        <button className="btn btn-ghost text-2xl font-extrabold text-[#1e1b4b] dark:text-orange-500 p-0 ">
+          Savor <span className="text-[#f9a06f]">Oasis</span>{" "}
         </button>
       </div>
       <div className="navbar-center hidden lg:flex">
