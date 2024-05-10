@@ -48,6 +48,20 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/all-food"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? " border-2 border-[#1e1b4b] text-[#f9a06f] px-4 bg-[#1e1b4b] hover:text-[#f9a06f] focus:bg-[#1e1b4b] focus:text-[#f9a06f] py-2 font-bold"
+              : "hover:text-[#f9a06f] py-2 font-bold border-2 px-4 border-[#f9a06f]"
+          }
+        >
+          All Food
+        </NavLink>
+      </li>
     </>
   );
   const navLinks = (
@@ -64,6 +78,20 @@ const Navbar = () => {
           }
         >
           Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/all-food"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "text-[#f9a06f] border-b-4 border-[#f9a06f]"
+              : "hover:text-[#f9a06f]"
+          }
+        >
+          All Food
         </NavLink>
       </li>
     </>

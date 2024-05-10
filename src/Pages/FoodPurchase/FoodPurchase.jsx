@@ -172,7 +172,13 @@ const FoodPurchase = () => {
           </div>
 
           <div className="flex justify-end mt-6">
-            <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+            {food.quantity === 0 && (
+              <p className="text-red-600 italic">item is not available.</p>
+            )}
+            <button
+              disabled={food.quantity === 0}
+              className="px-8 disabled:cursor-not-allowed py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+            >
               Purchase
             </button>
           </div>
