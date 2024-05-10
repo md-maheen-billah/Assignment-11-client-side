@@ -22,6 +22,40 @@ const FoodPurchase = () => {
     };
     getData();
   }, [id]);
+
+  const handlePurchase = async (e) => {
+    e.preventDefault();
+    const foodName = food.foodName;
+    const price = food.price;
+    const foodImage = food.foodImage;
+    const sellerName = food.sellerName;
+    const sellerEmail = food.sellerEmail;
+    const buyerEmail = user.email;
+    const buyerName = user.displayName;
+    const buyDate = fullDate;
+
+    const purchaseData = {
+      foodName,
+      price,
+      foodImage,
+      sellerName,
+      sellerEmail,
+      buyerEmail,
+      buyerName,
+      buyDate,
+    };
+
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/purchases`,
+        purchaseData
+      );
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+      console.log("Hi, i am error", err.message);
+    }
+  };
   return (
     <div>
       <h2>This is Food Purchase Page</h2>
@@ -30,7 +64,7 @@ const FoodPurchase = () => {
           Food Purchase
         </h2>
 
-        <form>
+        <form onSubmit={handlePurchase}>
           <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
             <div>
               <label
