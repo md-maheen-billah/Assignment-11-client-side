@@ -180,7 +180,7 @@ const Navbar = () => {
                 className="mt-3 z-[20] p-2 shadow menu menu-sm dropdown-content bg-[#f9a06f] font-semibold  text-[#1e1b4b]  w-52 right-2 lg:right-[-55px] rounded-box "
               >
                 <li>
-                  <Link to="/food-add" className="justify-between">
+                  <Link to="/my-added-food" className="justify-between">
                     My added food items
                   </Link>
                 </li>
@@ -190,7 +190,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/food-add" className="justify-between">
+                  <Link to="/my-ordered-food" className="justify-between">
                     My ordered food items
                   </Link>
                 </li>
