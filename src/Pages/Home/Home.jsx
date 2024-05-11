@@ -6,7 +6,9 @@ const Home = () => {
   const [foods, setFoods] = useState([]);
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axios(`${import.meta.env.VITE_API_URL}/allfoods`);
+      const { data } = await axios(
+        `${import.meta.env.VITE_API_URL}/allfoods?search`
+      );
       setFoods(data);
     };
     getData();
