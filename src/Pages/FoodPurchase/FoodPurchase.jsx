@@ -34,6 +34,7 @@ const FoodPurchase = () => {
     const sellerEmail = food.sellerEmail;
     const buyerEmail = user.email;
     const quantity = food.quantity;
+    const foodId = food._id;
     const buyerName = user.displayName;
     const buyDate = fullDate;
     const quantityBought = parseFloat(form.quantityBought.value);
@@ -51,6 +52,7 @@ const FoodPurchase = () => {
       buyerName,
       buyDate,
       quantityBought,
+      foodId,
     };
 
     try {
