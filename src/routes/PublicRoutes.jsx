@@ -12,6 +12,7 @@ import AllFood from "../Pages/AllFood/AllFood";
 import MyAdded from "../Pages/MyAdded/MyAdded";
 import MyOrdered from "../Pages/MyOrdered/MyOrdered";
 import FoodUpdate from "../Pages/FoodUpdate/FoodUpdate";
+import Gallery from "../Pages/Gallery/Gallery";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/all-food",
         element: <AllFood></AllFood>,
+      },
+      {
+        path: "/gallery",
+        element: <Gallery></Gallery>,
       },
       {
         path: "/register",
