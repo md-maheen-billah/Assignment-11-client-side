@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
-import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const MyOrdered = () => {
   const { user } = useContext(AuthContext);
@@ -17,39 +17,47 @@ const MyOrdered = () => {
     getData();
   }, [user]);
 
-  const getData = async () => {
-    const { data } = await axios(
-      `${import.meta.env.VITE_API_URL}/purchases/${user?.email}`
-    );
-    setFoods(data);
-  };
-
   const handleDelete = async (id, foodId, quantityBought) => {
-    fetch(`${import.meta.env.VITE_API_URL}/delete-changes/${foodId}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ quantityBought }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${import.meta.env.VITE_API_URL}/delete-changes/${foodId}`, {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ quantityBought }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
 
-    try {
-      const { data } = await axios.delete(
-        `${import.meta.env.VITE_API_URL}/delete-purchases/${id}`
-      );
-      console.log(data);
-      toast.success("Delete Successful");
-
-      //refresh ui
-      getData();
-    } catch (err) {
-      console.log(err.message);
-      toast.error(err.message);
-    }
+        fetch(`${import.meta.env.VITE_API_URL}/delete-purchases/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount > 0) {
+              Swal.fire({
+                title: "Removed!",
+                text: "Your Item has been removed.",
+                icon: "success",
+              });
+              const remaining = foods.filter((item) => item._id !== id);
+              setFoods(remaining);
+            }
+          });
+      }
+    });
   };
 
   return (
