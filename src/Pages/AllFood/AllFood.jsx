@@ -25,11 +25,9 @@ const AllFood = () => {
     setSearch("");
     setSearchText("");
   };
-
-  console.log(search);
   return (
     <div>
-      <h2>This is home</h2>
+      <h2>This is All food</h2>
       <form onSubmit={handleSearch}>
         <div className="flex p-1 overflow-hidden rounded-lg  focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">
           <input

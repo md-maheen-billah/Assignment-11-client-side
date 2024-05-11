@@ -1,14 +1,26 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import bgImg from "../../assets/images/register.jpg";
 import logo from "../../assets/images/logo.png";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
 const Register = () => {
   const navigate = useNavigate();
-  const { signInWithGoogle, createUser, updateUserProfile, user, setUser } =
-    useContext(AuthContext);
-
+  const location = useLocation();
+  const {
+    signInWithGoogle,
+    createUser,
+    updateUserProfile,
+    user,
+    setUser,
+    loading,
+  } = useContext(AuthContext);
+  const from = location.state || "/";
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [navigate, user]);
   const handleSignUp = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -23,20 +35,20 @@ const Register = () => {
       console.log(result);
       await updateUserProfile(name, photo);
       setUser({ ...user, photoURL: photo, displayName: name, email: email });
-      navigate("/");
+      navigate(from, { replace: true });
       toast.success("Signup Successful");
     } catch (err) {
       console.log(err);
       toast.error(err?.message);
     }
   };
-
+  if (user || loading) return;
   // Google Signin
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
-      toast.success("Signin Successful");
-      navigate("/");
+      toast.success("Registration Successful");
+      navigate(from, { replace: true });
     } catch (err) {
       console.log(err);
       toast.error(err?.message);
