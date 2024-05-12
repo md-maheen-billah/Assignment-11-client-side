@@ -1,19 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const AllFood = () => {
-  const [foods, setFoods] = useState([]);
   const axiosSecure = useAxiosSecure();
   const [search, setSearch] = useState("");
   const [searchText, setSearchText] = useState("");
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await axiosSecure(`/allfoods?search=${search}`);
-      setFoods(data);
-    };
-    getData();
-  }, [search, axiosSecure]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -24,6 +17,18 @@ const AllFood = () => {
     setSearch("");
     setSearchText("");
   };
+
+  const { data: foods = [], isLoading } = useQuery({
+    queryFn: () => getData(),
+    queryKey: ["allfoods", search],
+  });
+
+  const getData = async () => {
+    const { data } = await axiosSecure(`/allfoods?search=${search}`);
+    return data;
+  };
+
+  if (isLoading) return <p>Data is still loading....</p>;
   return (
     <div>
       <h2>This is All food</h2>

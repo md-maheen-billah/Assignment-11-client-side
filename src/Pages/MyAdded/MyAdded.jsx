@@ -55,7 +55,7 @@ const MyAdded = () => {
 
   const { data: foods = [], isLoading } = useQuery({
     queryFn: () => getData(),
-    queryKey: ["allfoods"],
+    queryKey: ["allfoods", user?.email],
   });
 
   const getData = async () => {

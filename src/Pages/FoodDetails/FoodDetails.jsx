@@ -8,7 +8,7 @@ const FoodDetails = () => {
 
   const { data: food = {}, isLoading } = useQuery({
     queryFn: () => getData(),
-    queryKey: ["food-details"],
+    queryKey: ["food-details", id],
   });
 
   const getData = async () => {

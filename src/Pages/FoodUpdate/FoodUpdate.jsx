@@ -1,20 +1,24 @@
-import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const FoodUpdate = () => {
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
-  const [food, setFood] = useState({});
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await axiosSecure(`/food-details/${id}`);
-      setFood(data);
-    };
-    getData();
-  }, [id, axiosSecure]);
+  const { mutateAsync } = useMutation({
+    mutationFn: async ({ updateFood }) => {
+      const { data } = await axiosSecure.put(`/update-foods/${id}`, updateFood);
+      console.log(data);
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("Food Updated Successfully");
+      queryClient.invalidateQueries({ queryKey: ["food-details"] });
+    },
+  });
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -37,10 +41,20 @@ const FoodUpdate = () => {
       price,
     };
 
-    const { data } = await axiosSecure.put(`/update-foods/${id}`, updateFood);
-    console.log(data);
-    toast.success("Food Updated Successfully");
+    await mutateAsync({ updateFood });
   };
+
+  const { data: food = {}, isLoading } = useQuery({
+    queryFn: () => getData(),
+    queryKey: ["food-details", id],
+  });
+
+  const getData = async () => {
+    const { data } = await axiosSecure(`/food-details/${id}`);
+    return data;
+  };
+
+  if (isLoading) return <p>Data is still loading....</p>;
 
   return (
     <div>

@@ -2,7 +2,15 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        greenM: "#004643",
+        goldenM: "#F9BC60",
+        lgreenM: "#ABD1C6",
+        redM: "#E16162",
+        whiteM: "#EFF0F3",
+      },
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {
@@ -10,17 +18,7 @@ export default {
       {
         light: {
           ...require("daisyui/src/theming/themes")["light"],
-          primary: "#f9a06f",
-          secondary: "teal",
-          "background-color": "#fff4ed",
-        },
-      },
-      {
-        synthwave: {
-          ...require("daisyui/src/theming/themes")["synthwave"],
-          primary: "#f9a06f",
-          secondary: "teal",
-          "background-color": "#1a103d",
+          "background-color": "#004643",
         },
       },
     ],

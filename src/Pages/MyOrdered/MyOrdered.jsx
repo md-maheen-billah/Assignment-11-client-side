@@ -56,7 +56,7 @@ const MyOrdered = () => {
 
   const { data: foods = [], isLoading } = useQuery({
     queryFn: () => getData(),
-    queryKey: ["purchases"],
+    queryKey: ["purchases", user?.email],
   });
 
   const getData = async () => {
