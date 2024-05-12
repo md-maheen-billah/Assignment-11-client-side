@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 const MyOrdered = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const [foods, setFoods] = useState([]);
 
   useEffect(() => {

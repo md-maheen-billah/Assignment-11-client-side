@@ -1,11 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import toast from "react-hot-toast";
-import { AuthContext } from "../../providers/AuthProvider";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut } = useAuth();
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );

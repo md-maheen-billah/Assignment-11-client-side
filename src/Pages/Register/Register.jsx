@@ -1,10 +1,10 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import bgImg from "../../assets/images/register.jpg";
 import logo from "../../assets/images/logo.png";
-import { useContext, useEffect } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+import useAuth from "../../hooks/useAuth";
 const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -15,7 +15,7 @@ const Register = () => {
     user,
     setUser,
     loading,
-  } = useContext(AuthContext);
+  } = useAuth();
   const from = location.state || "/";
   useEffect(() => {
     if (user) {

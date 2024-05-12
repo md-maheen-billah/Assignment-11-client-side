@@ -1,10 +1,9 @@
-import { useContext } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
 
 const FoodAdd = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const handleAddFood = async (e) => {
     e.preventDefault();
     const form = e.target;

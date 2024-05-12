@@ -1,15 +1,15 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import bgImg from "../../assets/images/login.jpg";
 import logo from "../../assets/images/logo.png";
-import { useContext, useEffect } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { signIn, signInWithGoogle, user, loading } = useContext(AuthContext);
+  const { signIn, signInWithGoogle, user, loading } = useAuth();
   const from = location.state || "/";
   useEffect(() => {
     if (user) {

@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import useAuth from "../../hooks/useAuth";
 
 const FoodPurchase = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const date = new Date();
   let day = date.getDate();
   let month = date.getMonth() + 1;

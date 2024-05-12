@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 const MyAdded = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const [foods, setFoods] = useState([]);
 
   useEffect(() => {
