@@ -37,10 +37,11 @@ const AuthProvider = ({ children }) => {
   };
 
   const logOut = async () => {
-    setLoading(true);
-    await axios(`${import.meta.env.VITE_API_URL}/logout`, {
-      withCredentials: true,
-    });
+    axios
+      .post(`${import.meta.env.VITE_API_URL}/logout`, user, {
+        withCredentials: true,
+      })
+      .then(() => {});
     return signOut(auth);
   };
 
@@ -54,9 +55,24 @@ const AuthProvider = ({ children }) => {
   // onAuthStateChange
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const userEmail = currentUser?.email || user?.email;
+      const loggedUser = { email: userEmail };
       setUser(currentUser);
       console.log("CurrentUser-->", currentUser);
       setLoading(false);
+      if (currentUser) {
+        axios
+          .post(`${import.meta.env.VITE_API_URL}/jwt`, loggedUser, {
+            withCredentials: true,
+          })
+          .then(() => {});
+      } else {
+        axios
+          .post(`${import.meta.env.VITE_API_URL}/logout`, loggedUser, {
+            withCredentials: true,
+          })
+          .then(() => {});
+      }
     });
     return () => {
       return unsubscribe();
