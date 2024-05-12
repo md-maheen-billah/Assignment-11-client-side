@@ -10,7 +10,8 @@ const MyOrdered = () => {
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios(
-        `${import.meta.env.VITE_API_URL}/purchases/${user?.email}`
+        `${import.meta.env.VITE_API_URL}/purchases/${user?.email}`,
+        { withCredentials: true }
       );
       setFoods(data);
     };
@@ -30,6 +31,7 @@ const MyOrdered = () => {
       if (result.isConfirmed) {
         fetch(`${import.meta.env.VITE_API_URL}/delete-changes/${foodId}`, {
           method: "PATCH",
+          credentials: "include",
           headers: {
             "content-type": "application/json",
           },
@@ -42,6 +44,7 @@ const MyOrdered = () => {
 
         fetch(`${import.meta.env.VITE_API_URL}/delete-purchases/${id}`, {
           method: "DELETE",
+          credentials: "include",
         })
           .then((res) => res.json())
           .then((data) => {

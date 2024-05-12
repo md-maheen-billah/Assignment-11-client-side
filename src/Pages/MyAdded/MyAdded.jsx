@@ -11,7 +11,8 @@ const MyAdded = () => {
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios(
-        `${import.meta.env.VITE_API_URL}/allfoods/${user?.email}`
+        `${import.meta.env.VITE_API_URL}/allfoods/${user?.email}`,
+        { withCredentials: true }
       );
       setFoods(data);
     };
@@ -31,6 +32,7 @@ const MyAdded = () => {
       if (result.isConfirmed) {
         fetch(`${import.meta.env.VITE_API_URL}/delete-food/${id}`, {
           method: "DELETE",
+          credentials: "include",
         })
           .then((res) => res.json())
           .then((data) => {
@@ -47,6 +49,7 @@ const MyAdded = () => {
                 `${import.meta.env.VITE_API_URL}/delete-purchases-food/${id}`,
                 {
                   method: "DELETE",
+                  credentials: "include",
                 }
               )
                 .then((res) => res.json())

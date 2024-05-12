@@ -10,7 +10,8 @@ const FoodUpdate = () => {
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios(
-        `${import.meta.env.VITE_API_URL}/food-details/${id}`
+        `${import.meta.env.VITE_API_URL}/food-details/${id}`,
+        { withCredentials: true }
       );
       setFood(data);
     };
@@ -39,6 +40,7 @@ const FoodUpdate = () => {
     };
     fetch(`${import.meta.env.VITE_API_URL}/update-foods/${id}`, {
       method: "PUT",
+      credentials: "include",
       headers: {
         "content-type": "application/json",
       },

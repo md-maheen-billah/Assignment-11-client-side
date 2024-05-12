@@ -17,7 +17,8 @@ const FoodPurchase = () => {
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios(
-        `${import.meta.env.VITE_API_URL}/food-details/${id}`
+        `${import.meta.env.VITE_API_URL}/food-details/${id}`,
+        { withCredentials: true }
       );
       setFood(data);
     };
@@ -58,7 +59,8 @@ const FoodPurchase = () => {
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/purchases`,
-        purchaseData
+        purchaseData,
+        { withCredentials: true }
       );
       if (data?.insertedId) {
         toast.success("Ordered Successfully");
@@ -70,6 +72,7 @@ const FoodPurchase = () => {
 
     fetch(`${import.meta.env.VITE_API_URL}/purchase-changes/${id}`, {
       method: "PATCH",
+      credentials: "include",
       headers: {
         "content-type": "application/json",
       },
