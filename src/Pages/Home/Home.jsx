@@ -1,16 +1,17 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Home = () => {
+  const axiosSecure = useAxiosSecure();
   const [foods, setFoods] = useState([]);
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axios(`${import.meta.env.VITE_API_URL}/allfoods`);
+      const { data } = await axiosSecure(`/allfoods`);
       setFoods(data);
     };
     getData();
-  }, []);
+  }, [axiosSecure]);
   return (
     <div>
       <h2>This is home</h2>

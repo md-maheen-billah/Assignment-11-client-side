@@ -1,22 +1,20 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const FoodUpdate = () => {
+  const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const [food, setFood] = useState({});
 
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axios(
-        `${import.meta.env.VITE_API_URL}/food-details/${id}`,
-        { withCredentials: true }
-      );
+      const { data } = await axiosSecure(`/food-details/${id}`);
       setFood(data);
     };
     getData();
-  }, [id]);
+  }, [id, axiosSecure]);
 
   const handleUpdate = (e) => {
     e.preventDefault();

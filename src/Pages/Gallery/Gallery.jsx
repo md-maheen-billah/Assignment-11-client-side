@@ -1,22 +1,23 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Gallery = () => {
   const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
   const [galley, setGallery] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axios(`${import.meta.env.VITE_API_URL}/gallery`);
+      const { data } = await axiosSecure(`/gallery`);
       setGallery(data);
     };
     getData();
-  }, []);
+  }, [axiosSecure]);
   const handleModalOpen = () => {
     // Check if user is logged in
     if (user) {
@@ -28,7 +29,7 @@ const Gallery = () => {
   };
 
   const getData = async () => {
-    const { data } = await axios(`${import.meta.env.VITE_API_URL}/gallery`);
+    const { data } = await axiosSecure(`/gallery`);
     setGallery(data);
   };
 
@@ -45,11 +46,7 @@ const Gallery = () => {
       name,
     };
     try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/gallery`,
-        newFood,
-        { withCredentials: true }
-      );
+      const { data } = await axiosSecure.post(`/gallery`, newFood);
       console.log(data);
       getData();
       toast.success("Posted Successfully!");

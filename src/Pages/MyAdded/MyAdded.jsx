@@ -1,23 +1,21 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyAdded = () => {
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [foods, setFoods] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axios(
-        `${import.meta.env.VITE_API_URL}/allfoods/${user?.email}`,
-        { withCredentials: true }
-      );
+      const { data } = await axiosSecure(`/allfoods/${user?.email}`);
       setFoods(data);
     };
     getData();
-  }, [user]);
+  }, [user, axiosSecure]);
 
   const handleDelete = async (id) => {
     Swal.fire({

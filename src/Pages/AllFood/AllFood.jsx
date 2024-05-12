@@ -1,20 +1,19 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const AllFood = () => {
   const [foods, setFoods] = useState([]);
+  const axiosSecure = useAxiosSecure();
   const [search, setSearch] = useState("");
   const [searchText, setSearchText] = useState("");
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axios(
-        `${import.meta.env.VITE_API_URL}/allfoods?search=${search}`
-      );
+      const { data } = await axiosSecure(`/allfoods?search=${search}`);
       setFoods(data);
     };
     getData();
-  }, [search]);
+  }, [search, axiosSecure]);
 
   const handleSearch = (e) => {
     e.preventDefault();

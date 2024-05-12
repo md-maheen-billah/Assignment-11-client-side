@@ -1,9 +1,10 @@
-import axios from "axios";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const FoodAdd = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const handleAddFood = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -33,11 +34,7 @@ const FoodAdd = () => {
       sellerPhoto,
     };
     try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/allfoods`,
-        newFood,
-        { withCredentials: true }
-      );
+      const { data } = await axiosSecure.post(`/allfoods`, newFood);
       console.log(data);
       toast.success("Food Added Successfully!");
       //   navigate("/my-posted-jobs");

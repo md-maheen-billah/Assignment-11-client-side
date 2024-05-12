@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const FoodPurchase = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const date = new Date();
   let day = date.getDate();
   let month = date.getMonth() + 1;
@@ -16,14 +17,11 @@ const FoodPurchase = () => {
   const [food, setFood] = useState({});
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axios(
-        `${import.meta.env.VITE_API_URL}/food-details/${id}`,
-        { withCredentials: true }
-      );
+      const { data } = await axiosSecure(`/food-details/${id}`);
       setFood(data);
     };
     getData();
-  }, [id]);
+  }, [id, axiosSecure]);
 
   const handlePurchase = async (e) => {
     e.preventDefault();
@@ -57,11 +55,7 @@ const FoodPurchase = () => {
     };
 
     try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/purchases`,
-        purchaseData,
-        { withCredentials: true }
-      );
+      const { data } = await axiosSecure.post(`/purchases`, purchaseData);
       if (data?.insertedId) {
         toast.success("Ordered Successfully");
       }
