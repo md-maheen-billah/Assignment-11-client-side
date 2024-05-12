@@ -16,7 +16,7 @@ const FoodUpdate = () => {
     getData();
   }, [id, axiosSecure]);
 
-  const handleUpdate = (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     const form = e.target;
     const foodName = form.foodName.value;
@@ -36,20 +36,10 @@ const FoodUpdate = () => {
       quantity,
       price,
     };
-    fetch(`${import.meta.env.VITE_API_URL}/update-foods/${id}`, {
-      method: "PUT",
-      credentials: "include",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updateFood),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.modifiedCount > 0) {
-          toast.success("Food Updated Successfully");
-        }
-      });
+
+    const { data } = await axiosSecure.put(`/update-foods/${id}`, updateFood);
+    console.log(data);
+    toast.success("Food Updated Successfully");
   };
 
   return (

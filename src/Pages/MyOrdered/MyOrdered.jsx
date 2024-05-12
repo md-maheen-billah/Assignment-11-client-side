@@ -1,20 +1,41 @@
-import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const MyOrdered = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const [foods, setFoods] = useState([]);
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await axiosSecure(`/purchases/${user?.email}`);
-      setFoods(data);
-    };
-    getData();
-  }, [user, axiosSecure]);
+  const { mutateAsync: mutateDeleteChanges } = useMutation({
+    mutationFn: async ({ foodId, quantityBought }) => {
+      const { data } = await axiosSecure.patch(`/delete-changes/${foodId}`, {
+        quantityBought,
+      });
+      console.log(data);
+      return data;
+    },
+    onSuccess: () => {
+      Swal.fire({
+        title: "Removed!",
+        text: "Your Item has been removed.",
+        icon: "success",
+      });
+      queryClient.invalidateQueries({ queryKey: ["purchases"] });
+    },
+  });
+
+  const { mutateAsync: mutateDelete } = useMutation({
+    mutationFn: async ({ id }) => {
+      const { data } = await axiosSecure.delete(`/delete-purchases/${id}`);
+      console.log(data);
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["purchases"] });
+    },
+  });
 
   const handleDelete = async (id, foodId, quantityBought) => {
     Swal.fire({
@@ -27,39 +48,23 @@ const MyOrdered = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`${import.meta.env.VITE_API_URL}/delete-changes/${foodId}`, {
-          method: "PATCH",
-          credentials: "include",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ quantityBought }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          });
-
-        fetch(`${import.meta.env.VITE_API_URL}/delete-purchases/${id}`, {
-          method: "DELETE",
-          credentials: "include",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            if (data.deletedCount > 0) {
-              Swal.fire({
-                title: "Removed!",
-                text: "Your Item has been removed.",
-                icon: "success",
-              });
-              const remaining = foods.filter((item) => item._id !== id);
-              setFoods(remaining);
-            }
-          });
+        mutateDelete({ id });
+        mutateDeleteChanges({ foodId, quantityBought });
       }
     });
   };
+
+  const { data: foods = [], isLoading } = useQuery({
+    queryFn: () => getData(),
+    queryKey: ["purchases"],
+  });
+
+  const getData = async () => {
+    const { data } = await axiosSecure(`/purchases/${user?.email}`);
+    return data;
+  };
+
+  if (isLoading) return <p>Data is still loading....</p>;
 
   return (
     <div>

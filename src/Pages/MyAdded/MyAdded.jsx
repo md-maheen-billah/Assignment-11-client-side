@@ -53,7 +53,7 @@ const MyAdded = () => {
     });
   };
 
-  const { data: foods = {}, isLoading } = useQuery({
+  const { data: foods = [], isLoading } = useQuery({
     queryFn: () => getData(),
     queryKey: ["allfoods"],
   });
