@@ -1,23 +1,27 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const Gallery = () => {
+  const queryClient = useQueryClient();
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
-  const [galley, setGallery] = useState([]);
 
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await axiosSecure(`/gallery`);
-      setGallery(data);
-    };
-    getData();
-  }, [axiosSecure]);
+  const getData = async () => {
+    const { data } = await axiosSecure(`/gallery`);
+    return data;
+  };
+
+  const { data: gallery = [], isLoading } = useQuery({
+    queryFn: () => getData(),
+    queryKey: ["gallery"],
+  });
+
   const handleModalOpen = () => {
     // Check if user is logged in
     if (user) {
@@ -28,10 +32,17 @@ const Gallery = () => {
     }
   };
 
-  const getData = async () => {
-    const { data } = await axiosSecure(`/gallery`);
-    setGallery(data);
-  };
+  const { mutateAsync } = useMutation({
+    mutationFn: async ({ newFood }) => {
+      const { data } = await axiosSecure.post(`/gallery`, newFood);
+      console.log(data);
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("Posted Successfully!");
+      queryClient.invalidateQueries({ queryKey: ["gallery"] });
+    },
+  });
 
   const handleAddExperience = async (e) => {
     e.preventDefault();
@@ -45,16 +56,11 @@ const Gallery = () => {
       description,
       name,
     };
-    try {
-      const { data } = await axiosSecure.post(`/gallery`, newFood);
-      console.log(data);
-      getData();
-      toast.success("Posted Successfully!");
-      //   navigate("/my-posted-jobs");
-    } catch (err) {
-      console.log(err);
-    }
+
+    await mutateAsync({ newFood });
   };
+
+  if (isLoading) return <p>Data is still loading....</p>;
 
   return (
     <div>
@@ -155,7 +161,7 @@ const Gallery = () => {
         </div>
       </div>
       <div className="grid grid-cols-3 mt-8 gap-8">
-        {galley.map((post) => (
+        {gallery.map((post) => (
           <div key={post._id} className="relative group">
             <img
               className="object-cover w-full h-full rounded-lg"

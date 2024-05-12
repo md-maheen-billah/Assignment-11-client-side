@@ -3,8 +3,10 @@ import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const FoodPurchase = () => {
+  const queryClient = useQueryClient();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const date = new Date();
@@ -14,14 +16,31 @@ const FoodPurchase = () => {
   let fullDate = `${day}/${month}/${year}`;
 
   const { id } = useParams();
-  const [food, setFood] = useState({});
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await axiosSecure(`/food-details/${id}`);
-      setFood(data);
-    };
-    getData();
-  }, [id, axiosSecure]);
+
+  const { mutateAsync: mutatePurchase } = useMutation({
+    mutationFn: async ({ purchaseData }) => {
+      const { data } = await axiosSecure.post(`/purchases`, purchaseData);
+      console.log(data);
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("Ordered Successfully");
+      queryClient.invalidateQueries({ queryKey: ["food-details"] });
+    },
+  });
+
+  const { mutateAsync: mutateQuantityBought } = useMutation({
+    mutationFn: async ({ quantityBought }) => {
+      const { data } = await axiosSecure.patch(`/purchase-changes/${id}`, {
+        quantityBought,
+      });
+      console.log(data);
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["food-details"] });
+    },
+  });
 
   const handlePurchase = async (e) => {
     e.preventDefault();
@@ -54,29 +73,44 @@ const FoodPurchase = () => {
       foodId,
     };
 
-    try {
-      const { data } = await axiosSecure.post(`/purchases`, purchaseData);
-      if (data?.insertedId) {
-        toast.success("Ordered Successfully");
-      }
-    } catch (err) {
-      console.log(err);
-      console.log("Hi, i am error", err.message);
-    }
+    await mutatePurchase({ purchaseData });
+    await mutateQuantityBought({ quantityBought });
 
-    fetch(`${import.meta.env.VITE_API_URL}/purchase-changes/${id}`, {
-      method: "PATCH",
-      credentials: "include",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ quantityBought }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
+    // try {
+    //   const { data } = await axiosSecure.post(`/purchases`, purchaseData);
+    //   if (data?.insertedId) {
+    //     toast.success("Ordered Successfully");
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    //   console.log("Hi, i am error", err.message);
+    // }
+
+    // fetch(`${import.meta.env.VITE_API_URL}/purchase-changes/${id}`, {
+    //   method: "PATCH",
+    //   credentials: "include",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify({ quantityBought }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //   });
   };
+
+  const { data: food = {}, isLoading } = useQuery({
+    queryFn: () => getData(),
+    queryKey: ["food-details"],
+  });
+
+  const getData = async () => {
+    const { data } = await axiosSecure(`/food-details/${id}`);
+    return data;
+  };
+
+  if (isLoading) return <p>Data is still loading....</p>;
   return (
     <div>
       <h2>This is Food Purchase Page</h2>

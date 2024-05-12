@@ -1,17 +1,21 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const Home = () => {
   const axiosSecure = useAxiosSecure();
-  const [foods, setFoods] = useState([]);
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await axiosSecure(`/allfoods`);
-      setFoods(data);
-    };
-    getData();
-  }, [axiosSecure]);
+
+  const { data: foods = [], isLoading } = useQuery({
+    queryFn: () => getData(),
+    queryKey: ["allfoods"],
+  });
+
+  const getData = async () => {
+    const { data } = await axiosSecure(`/allfoods`);
+    return data;
+  };
+
+  if (isLoading) return <p>Data is still loading....</p>;
   return (
     <div>
       <h2>This is home</h2>
