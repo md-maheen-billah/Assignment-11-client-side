@@ -1,21 +1,40 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const MyAdded = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const [foods, setFoods] = useState([]);
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await axiosSecure(`/allfoods/${user?.email}`);
-      setFoods(data);
-    };
-    getData();
-  }, [user, axiosSecure]);
+  const { mutateAsync: mutateDelete } = useMutation({
+    mutationFn: async ({ id }) => {
+      const { data } = await axiosSecure.delete(`/delete-food/${id}`);
+      console.log(data);
+      return data;
+    },
+    onSuccess: () => {
+      Swal.fire({
+        title: "Removed!",
+        text: "Your Item has been removed.",
+        icon: "success",
+      });
+      queryClient.invalidateQueries({ queryKey: ["allfoods"] });
+    },
+  });
+
+  const { mutateAsync: mutateDeletePurchase } = useMutation({
+    mutationFn: async ({ id }) => {
+      const { data } = await axiosSecure.delete(`/delete-purchases-food/${id}`);
+      console.log(data);
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["allfoods"] });
+    },
+  });
 
   const handleDelete = async (id) => {
     Swal.fire({
@@ -28,37 +47,23 @@ const MyAdded = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`${import.meta.env.VITE_API_URL}/delete-food/${id}`, {
-          method: "DELETE",
-          credentials: "include",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            if (data.deletedCount > 0) {
-              Swal.fire({
-                title: "Removed!",
-                text: "Your Item has been removed.",
-                icon: "success",
-              });
-              const remaining = foods.filter((item) => item._id !== id);
-              setFoods(remaining);
-              fetch(
-                `${import.meta.env.VITE_API_URL}/delete-purchases-food/${id}`,
-                {
-                  method: "DELETE",
-                  credentials: "include",
-                }
-              )
-                .then((res) => res.json())
-                .then((data) => {
-                  console.log(data);
-                });
-            }
-          });
+        mutateDelete({ id });
+        mutateDeletePurchase({ id });
       }
     });
   };
+
+  const { data: foods = {}, isLoading } = useQuery({
+    queryFn: () => getData(),
+    queryKey: ["allfoods"],
+  });
+
+  const getData = async () => {
+    const { data } = await axiosSecure(`/allfoods/${user?.email}`);
+    return data;
+  };
+
+  if (isLoading) return <p>Data is still loading....</p>;
 
   return (
     <div>
