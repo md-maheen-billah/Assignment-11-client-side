@@ -198,6 +198,15 @@ const Nav = () => {
                     My ordered food items
                   </NavLink>
                 </li>
+
+                <li className="lg:hidden px-2 pt-2">
+                  <a
+                    onClick={handleSignOut}
+                    className="btn w-full font-semibold bg-greenM hover:bg-lgreenM text-whiteM border-none hover:text-greenM"
+                  >
+                    Sign Out
+                  </a>
+                </li>
               </ul>
             </div>
             <button

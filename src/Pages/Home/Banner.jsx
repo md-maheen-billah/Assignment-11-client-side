@@ -7,7 +7,7 @@ const Banner = () => {
     {
       img: "https://i.ibb.co/L0HCPZR/9bc48fea-7577-4823-a60e-0fb49614006b.jpg",
       title: "Savor Delights",
-      des: "Discover culinary marvels. Indulge in a world of flavors.",
+      des: "Discover culinary marvels. Indulge in a world of flavorful experience.",
     },
     {
       img: "https://i.ibb.co/2vdn13m/9fd16e3b-34bb-4d2b-bc7c-de9251ab25d6.jpg",
