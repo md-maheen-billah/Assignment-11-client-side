@@ -22,7 +22,7 @@ const Home = () => {
   return (
     <div className="">
       <Banner></Banner>
-      <section className="my-6">
+      <section className="lg:mt-16 mt-4 mb-10 lg:mb-20">
         <div className="my-6">
           <h2 className="text-center font-bold text-3xl text-whiteM mb-2">
             Top Foods Section

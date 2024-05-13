@@ -124,7 +124,7 @@ const Nav = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-4 text-greenM font-semibold z-[10] p-2 shadow bg-goldenM rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-4 text-greenM font-semibold z-50 p-2 shadow bg-goldenM rounded-box w-52"
           >
             {navLinks2}
           </ul>

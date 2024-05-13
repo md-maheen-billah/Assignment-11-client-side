@@ -49,7 +49,7 @@ const Banner = () => {
 
   return (
     <div
-      className="w-full mt-8 rounded-2xl h-60 sm:h-96 md:h-[400px] flex flex-col xl:flex-row items-center justify-center gap-5 lg:gap-10 relative bg-cover bg-center before:absolute before:bg-black/40 before:inset-0 transform duration-1000 ease-linear z-50 overflow-hidden"
+      className="w-full mt-6 lg:mt-12 rounded-2xl h-60 sm:h-96 md:h-[400px] flex flex-col xl:flex-row items-center justify-center gap-5 lg:gap-10 relative bg-cover bg-center before:absolute before:bg-black/40 before:inset-0 transform duration-1000 ease-linear overflow-hidden"
       style={{
         backgroundImage: `url(${
           currentSlider === 0
