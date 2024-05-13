@@ -8,7 +8,7 @@ assignment_category_0005
 Firebase- https://savor-oasis.web.app/
 
 # Technologies
-Inplemented the following:
+Implemented the following:
 -  MongoDB: Employs MongoDB for flexible and scalable data storage.
 -  Express.js: Utilizes Express.js for streamlined server-side development.
 -  Node.js: Leverages Node.js for scalable and high-performance server applications.
@@ -16,7 +16,7 @@ Inplemented the following:
 -  Firebase Authentication: Integrates Firebase Authentication for user authentication and authorization.
 
 # Features
-Inplemented the following:
+Implemented the following:
 -  Context API: Utilizes React Context API for managing global state and data across components.
 -  Search Functionality: Implements functionality to search data based on food name.
 -  Mobile and Tablet Responsive: Ensures responsive design and layout for optimal viewing experience on mobile and tablet devices.
