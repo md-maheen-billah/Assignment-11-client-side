@@ -63,9 +63,9 @@ const Register = () => {
       </Helmet>
       <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-lgreenM rounded-lg shadow-lg  lg:max-w-4xl ">
         <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
-          <p className="mt-3 text-xl text-center text-greenM ">
+          <div className="mt-3 text-xl text-center text-greenM ">
             <Bounce>Register Account Now!</Bounce>
-          </p>
+          </div>
 
           <form onSubmit={handleSignUp}>
             <div className="mt-4">
