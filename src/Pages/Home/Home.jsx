@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Spinner from "../../components/Spinner";
 import Banner from "./Banner";
 import Offer from "./Offer";
+import RoadMap from "./RoadMap";
 
 const Home = () => {
   const axiosSecure = useAxiosSecure();
@@ -54,6 +55,7 @@ const Home = () => {
           </Link>
         </div>
       </section>
+      <RoadMap></RoadMap>
       <Offer></Offer>
     </div>
   );
