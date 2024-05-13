@@ -4,7 +4,6 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../../components/Spinner";
-import bgimg from "../../assets/images/pixlr-image-generator-f6eccbee-e8bc-41b6-8ce3-717b86291580.png";
 
 const FoodPurchase = () => {
   const queryClient = useQueryClient();
