@@ -129,7 +129,7 @@ const Nav = () => {
             {navLinks2}
           </ul>
         </div>
-        <a className="btn btn-ghost text-greenM text-2xl font-extrabold">
+        <a className="btn btn-ghost pl-0 text-greenM text-2xl font-extrabold">
           Savor Oasis <img className="h-8" src={logoN} alt="" />
         </a>
       </div>
@@ -138,18 +138,24 @@ const Nav = () => {
       </div>
       <div className="navbar-end">
         {user && user.photoURL ? (
-          <>
-            <details className="dropdown menu menu-sm rounded-full">
-              <summary className=" w-10 h-10 rounded-full hover:cursor-pointer btn-ghost btn-circle avatar">
-                {" "}
-                <img
-                  className="rounded-full border-2 border-greenM"
-                  alt="User Profile Photo"
-                  referrerPolicy="no-referrer"
-                  src={user.photoURL}
-                />
-              </summary>
-              <ul className="p-2 shadow mt-6 text-greenM font-semibold space-y-1 right-2 lg:right-[-55px]  dropdown-content z-[10] bg-goldenM rounded-box w-52">
+          <div className="flex items-center">
+            <div className="dropdown ">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-9 rounded-full border-greenM border-2">
+                  <img
+                    alt="Tailwind CSS Navbar component"
+                    src={user.photoURL}
+                  />
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-4 text-greenM font-semibold z-[20] p-2 shadow right-1 lg:right-[-80px] bg-goldenM rounded-box w-52"
+              >
                 <li>
                   <NavLink
                     to="/my-added-food"
@@ -192,18 +198,8 @@ const Nav = () => {
                     My ordered food items
                   </NavLink>
                 </li>
-                <li className="lg:hidden">
-                  <div className="flex justify-center">
-                    <a
-                      onClick={handleSignOut}
-                      className="btn w-full font-semibold bg-greenM hover:bg-lgreenM text-whiteM border-none hover:text-greenM"
-                    >
-                      Sign Out
-                    </a>
-                  </div>
-                </li>
               </ul>
-            </details>
+            </div>
             <button
               onClick={handleSignOut}
               className="font-bold hidden lg:flex ml-2 rounded-md px-4 py-2 bg-greenM text-whiteM relative overflow-hidden group z-10 hover:text-greenM duration-1000"
@@ -212,7 +208,7 @@ const Nav = () => {
               <span className="absolute bg-lgreenM size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
               Sign Out
             </button>
-          </>
+          </div>
         ) : (
           <Link to="/login">
             <button className="font-bold ml-2 rounded-md px-4 py-2 bg-greenM text-whiteM relative overflow-hidden group z-10 hover:text-greenM duration-1000">
