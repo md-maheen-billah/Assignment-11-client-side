@@ -129,6 +129,12 @@ const MyOrdered = () => {
                         scope="col"
                         className="px-4 py-3.5 text-sm  text-left rtl:text-right font-medium text-greenM "
                       >
+                        Quantity
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-sm  text-left rtl:text-right font-medium text-greenM "
+                      >
                         Price
                       </th>
 
@@ -157,6 +163,12 @@ const MyOrdered = () => {
                         </td>
                         <td className="px-4 py-4 text-sm text-greenM whitespace-nowrap">
                           {food.sellerName}
+                        </td>
+                        <td
+                          title={food.quantityBought}
+                          className="px-4 py-4 text-sm text-greenM  whitespace-nowrap"
+                        >
+                          {food.quantityBought}
                         </td>
                         <td
                           title={food.price}

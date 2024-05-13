@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -7,6 +7,7 @@ import Spinner from "../../components/Spinner";
 
 const FoodPurchase = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const date = new Date();
@@ -38,6 +39,7 @@ const FoodPurchase = () => {
       return data;
     },
     onSuccess: () => {
+      navigate("/my-ordered-food");
       queryClient.invalidateQueries({ queryKey: ["food-details"] });
     },
   });

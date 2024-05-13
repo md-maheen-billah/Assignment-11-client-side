@@ -2,9 +2,11 @@ import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import bgimg from "../../assets/images/pixlr-image-generator-f6eccbee-e8bc-41b6-8ce3-717b86291580.png";
+import { useNavigate } from "react-router-dom";
 
 const FoodAdd = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
   const handleAddFood = async (e) => {
     e.preventDefault();
@@ -38,6 +40,7 @@ const FoodAdd = () => {
       const { data } = await axiosSecure.post(`/allfoods`, newFood);
       console.log(data);
       toast.success("Food Added Successfully!");
+      navigate("/my-added-food");
       //   navigate("/my-posted-jobs");
     } catch (err) {
       console.log(err);
