@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet-async";
 import { useEffect } from "react";
 import Aos from "aos";
 import { Bounce } from "react-awesome-reveal";
+import { Link } from "react-router-dom";
 
 const MyOrdered = () => {
   useEffect(() => {
@@ -227,6 +228,22 @@ const MyOrdered = () => {
           </div>
         </div>
       </section>
+      {foods.length < 1 && (
+        <div className="lg:mt-24 lg:mb-28 mt-8 mb-8">
+          <h1 className="text-4xl dark:text-[#f9a06f] text-redM text-center">
+            No Ordered Food Items Found!
+          </h1>
+          <div className="flex justify-center mt-6">
+            <Link to="/all-food">
+              <button className="font-bold animate__animated animate__pulse animate__infinite rounded-md px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000">
+                <span className="absolute bg-whiteM  size-36 rounded-full group-hover:scale-100 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
+                <span className="absolute bg-lgreenM size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
+                Order Food
+              </button>
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
