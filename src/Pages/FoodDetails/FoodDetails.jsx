@@ -20,7 +20,7 @@ const FoodDetails = () => {
   if (isLoading) return <Spinner></Spinner>;
   return (
     <div>
-      <section className="pb-12 lg:py-24  text-whiteM dark:text-white relative overflow-hidden">
+      <section className="pb-12 lg:py-20  text-whiteM dark:text-white relative overflow-hidden">
         <div className="container px-4 mx-auto relative">
           <div className="flex flex-col md:flex-row md:gap-12 items-center justify-between">
             <div className="w-full md:w-1/2   md:text-start my-12">
@@ -34,8 +34,12 @@ const FoodDetails = () => {
                   alt=""
                 />
                 <div>
-                  <p className="text-lg text-left">{food.sellerName}</p>
-                  <p>{food.sellerEmail}</p>
+                  <p className="text-lg text-left truncate max-w-52 lg:max-w-full">
+                    {food.sellerName}
+                  </p>
+                  <p className="truncate max-w-52 lg:max-w-full">
+                    {food.sellerEmail}
+                  </p>
                 </div>
               </div>
               <p className="lg:text-lg text-left mt-4 text-lgreenM leading-normal opacity-80">

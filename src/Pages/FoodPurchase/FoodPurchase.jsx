@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../../components/Spinner";
+import bgimg from "../../assets/images/pixlr-image-generator-f6eccbee-e8bc-41b6-8ce3-717b86291580.png";
 
 const FoodPurchase = () => {
   const queryClient = useQueryClient();
@@ -90,19 +91,27 @@ const FoodPurchase = () => {
   if (isLoading) return <Spinner></Spinner>;
   return (
     <div>
-      <h2>This is Food Purchase Page</h2>
-      <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-        <h2 className="text-lg font-semibold text-gray-700 capitalize dark:text-white">
-          Food Purchase
-        </h2>
-
-        <form onSubmit={handlePurchase}>
-          <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-            <div>
-              <label
-                className="text-gray-700 dark:text-gray-200"
-                htmlFor="buyerName"
-              >
+      <div
+        style={{
+          backgroundImage: `linear-gradient(180deg,  rgba(0,0,0,0.1), rgba(0,0,0,1)), linear-gradient(360deg,  rgba(0,0,0,0.1), rgba(0,0,0,0.3)),  url(${food.foodImage})`,
+        }}
+        className="mt-8 rounded-2xl bg-cover bg-center flex justify-center items-center lg:h-56"
+      >
+        <div>
+          <h2 className=" text-center pt-2 lg:pt-0 font-bold text-2xl md:text-4xl text-whiteM mb-2">
+            Purchase Item
+          </h2>
+          <p className="text-lgreenM px-4 pb-4 text-center">
+            Please check the following information carefully before proceeding
+            to buy {food.foodName}
+          </p>
+        </div>
+      </div>
+      <div className="lg:mt-8 mt-6 mb-10 lg:mb-20">
+        <form onSubmit={handlePurchase} className="mt-4 space-y-3">
+          <div className="flex flex-col lg:flex-row lg:gap-8 gap-3">
+            <div className="lg:w-1/2">
+              <label className="text-whiteM font-semibold" htmlFor="buyerName">
                 Name
               </label>
               <input
@@ -111,13 +120,12 @@ const FoodPurchase = () => {
                 defaultValue={user.displayName}
                 readOnly
                 type="text"
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                className="mt-2 p-2 rounded-md w-full bg-whiteM"
               />
             </div>
-
-            <div>
+            <div className="lg:w-1/2">
               <label
-                className="text-gray-700 dark:text-gray-200"
+                className="text-whiteM  font-semibold"
                 htmlFor="buyerEmail"
               >
                 Email Address
@@ -128,29 +136,27 @@ const FoodPurchase = () => {
                 defaultValue={user.email}
                 readOnly
                 type="email"
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                className="mt-2  p-2 rounded-md w-full bg-whiteM"
               />
             </div>
-
-            <div>
-              <label
-                className="text-gray-700 dark:text-gray-200"
-                htmlFor="foodName"
-              >
+          </div>
+          <div className="flex flex-col lg:flex-row lg:gap-8 gap-3">
+            <div className="lg:w-1/2">
+              <label className="text-whiteM  font-semibold" htmlFor="foodName">
                 Food Name
               </label>
               <input
                 id="foodName"
                 name="foodName"
                 defaultValue={food.foodName}
+                readOnly
                 type="text"
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                className="mt-2  p-2 rounded-md w-full bg-whiteM"
               />
             </div>
-
-            <div>
+            <div className="lg:w-1/2">
               <label
-                className="text-gray-700 dark:text-gray-200"
+                className="text-whiteM  font-semibold"
                 htmlFor="buyingDate"
               >
                 Buying Date
@@ -160,40 +166,68 @@ const FoodPurchase = () => {
                 name="buyingDate"
                 defaultValue={fullDate}
                 type="text"
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                readOnly
+                className="mt-2  p-2 rounded-md w-full bg-whiteM"
               />
             </div>
           </div>
-
-          <div>
-            <label
-              className="text-gray-700 dark:text-gray-200"
-              htmlFor="quantityBought"
-            >
-              Quantity
-            </label>
-            <input
-              id="quantityBought"
-              name="quantityBought"
-              type="number"
-              required
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-            />
+          <div className="flex flex-col lg:flex-row lg:gap-8 gap-3">
+            <div className="lg:w-1/2">
+              <label
+                className="text-whiteM  font-semibold"
+                htmlFor="remainingQuantity"
+              >
+                Remaining Items
+              </label>
+              <input
+                id="remainingQuantity"
+                name="remainingQuantity"
+                defaultValue={food.quantity}
+                type="number"
+                readOnly
+                className="mt-2  p-2 rounded-md w-full bg-whiteM"
+              />
+            </div>
+            <div className="lg:w-1/2">
+              <label
+                className="text-whiteM  font-semibold"
+                htmlFor="quantityBought"
+              >
+                Quantity
+              </label>
+              <input
+                id="quantityBought"
+                name="quantityBought"
+                type="number"
+                min="0"
+                placeholder="Enter Buying Quantity"
+                required
+                className="mt-2  p-2 rounded-md w-full bg-whiteM"
+              />
+            </div>
           </div>
-
-          <div className="flex justify-end mt-6">
-            {food.quantity === 0 && (
-              <p className="text-red-600 italic">item is not available.</p>
-            )}
-            <button
-              disabled={food.quantity === 0}
-              className="px-8 disabled:cursor-not-allowed py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
-            >
-              Purchase
-            </button>
+          <div className="flex justify-center items-center">
+            <div className="flex flex-col">
+              {food.quantity === 0 && (
+                <p className="text-redM text-2xl font-bold text-left">
+                  Item is not available.
+                </p>
+              )}
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  disabled={food.quantity === 0}
+                  className="font-bold disabled:cursor-not-allowed mt-8 rounded-md px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000"
+                >
+                  <span className="absolute bg-whiteM  size-36 rounded-full group-hover:scale-100 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
+                  <span className="absolute bg-lgreenM size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
+                  Purchase
+                </button>
+              </div>
+            </div>
           </div>
         </form>
-      </section>
+      </div>
     </div>
   );
 };
