@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import HomeCard from "./HomeCard";
 import { Link } from "react-router-dom";
 import Spinner from "../../components/Spinner";
+import Banner from "./Banner";
 
 const Home = () => {
   const axiosSecure = useAxiosSecure();
@@ -20,6 +21,7 @@ const Home = () => {
   if (isLoading) return <Spinner></Spinner>;
   return (
     <div className="">
+      <Banner></Banner>
       <section className="my-6">
         <div className="my-6">
           <h2 className="text-center font-bold text-3xl text-whiteM mb-2">

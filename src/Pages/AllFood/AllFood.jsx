@@ -55,7 +55,7 @@ const AllFood = () => {
             <form onSubmit={handleSearch}>
               <div className="flex p-1 gap-2 overflow-hidden rounded-lg relative">
                 <input
-                  className="lg:px-6 pl-2 w-28 md:w-auto py-2 text-gray-700 rounded-lg placeholder-gray-500 bg-white outline-none focus:placeholder-transparent"
+                  className="lg:px-6 pl-2 pr-3 w-28 md:w-auto py-2 text-gray-700 rounded-lg  bg-whiteM outline-none focus:placeholder-transparent"
                   type="text"
                   onChange={(e) => setSearchText(e.target.value)}
                   value={searchText}
