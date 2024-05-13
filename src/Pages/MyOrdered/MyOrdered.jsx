@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Spinner from "../../components/Spinner";
 
 const MyOrdered = () => {
   const axiosSecure = useAxiosSecure();
@@ -64,7 +65,7 @@ const MyOrdered = () => {
     return data;
   };
 
-  if (isLoading) return <p>Data is still loading....</p>;
+  if (isLoading) return <Spinner></Spinner>;
 
   return (
     <div>

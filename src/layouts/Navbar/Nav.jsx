@@ -133,7 +133,7 @@ const Nav = () => {
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="flex font-medium gap-6">{navLinks}</ul>
+        <ul className="flex text-greenM font-medium gap-6">{navLinks}</ul>
       </div>
       <div className="navbar-end">
         {user && user.photoURL ? (
@@ -148,7 +148,7 @@ const Nav = () => {
                   src={user.photoURL}
                 />
               </summary>
-              <ul className="p-2 shadow mt-6 space-y-1 right-2 lg:right-[-55px]  dropdown-content z-[10] bg-goldenM rounded-box w-52">
+              <ul className="p-2 shadow mt-6 font-semibold space-y-1 right-2 lg:right-[-55px]  dropdown-content z-[10] bg-goldenM rounded-box w-52">
                 <li>
                   <NavLink
                     to="/my-added-food"

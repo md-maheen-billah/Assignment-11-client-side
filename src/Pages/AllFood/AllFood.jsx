@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import bgimg from "../../assets/images/pixlr-image-generator-506d4a2c-018d-457b-8b62-25cfb6920911.png";
+import Spinner from "../../components/Spinner";
+import AllFoodCard from "./AllFoodCard";
 
 const AllFood = () => {
   const axiosSecure = useAxiosSecure();
@@ -28,48 +30,63 @@ const AllFood = () => {
     return data;
   };
 
-  if (isLoading) return <p>Data is still loading....</p>;
+  if (isLoading) return <Spinner></Spinner>;
   return (
     <div>
-      <h2>This is All food</h2>
-      <form onSubmit={handleSearch}>
-        <div className="flex p-1 overflow-hidden rounded-lg  focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">
-          <input
-            className="px-6 py-2 text-gray-700 placeholder-gray-500 bg-white outline-none focus:placeholder-transparent"
-            type="text"
-            onChange={(e) => setSearchText(e.target.value)}
-            value={searchText}
-            name="search"
-            placeholder="Enter Food Name"
-            aria-label="Enter Food Name"
-          />
-
-          <button className="px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:bg-gray-600 focus:outline-none">
-            Search
-          </button>
+      <div
+        style={{
+          backgroundImage: `linear-gradient(180deg,  rgba(0,0,0,0.1), rgba(0,0,0,1)), url(${bgimg})`,
+        }}
+        className="mt-8 rounded-2xl bg-cover flex justify-center items-center lg:h-56"
+      >
+        <div>
+          <h2 className=" text-center font-bold text-2xl md:text-4xl text-whiteM mb-2">
+            All Food
+          </h2>
+          <p className="text-lgreenM px-4 pb-4 text-center">
+            Explore a world of flavors with our diverse selection of
+            mouthwatering dishes, each crafted to delight your senses and
+            satisfy your cravings.
+          </p>
         </div>
-      </form>
-      <button onClick={handleReset} className="btn">
-        Reset
-      </button>
-      <div className="grid grid-cols-3 gap-8">
-        {foods.map((food) => (
-          <div className="border-2 border-red-400" key={food._id}>
-            <p>{food.foodName}</p>
-            <img src={food.foodImage} width="100" alt="" />
-            <img
-              className="rounded-full"
-              src={food.sellerPhoto}
-              width="40"
-              alt=""
-            />
-            <p>Quantity: {food.quantity}</p>
-            <p>Purchased Time: {food.count}</p>
-            <Link to={`/food-details/${food._id}`}>
-              <button className="btn">Details</button>
-            </Link>
+      </div>
+      <div className="">
+        <div className="flex items-center justify-center my-6">
+          <div className="flex gap-1 items-center">
+            <form onSubmit={handleSearch}>
+              <div className="flex p-1 gap-2 overflow-hidden rounded-lg relative">
+                <input
+                  className="lg:px-6 pl-2 w-28 md:w-auto py-2 text-gray-700 rounded-lg placeholder-gray-500 bg-white outline-none focus:placeholder-transparent"
+                  type="text"
+                  onChange={(e) => setSearchText(e.target.value)}
+                  value={searchText}
+                  name="search"
+                  placeholder="Enter Food Name"
+                  aria-label="Enter Food Name"
+                />
+                <button className="font-bold rounded-md px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000">
+                  <span className="absolute bg-whiteM  size-36 rounded-full group-hover:scale-100 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
+                  <span className="absolute bg-lgreenM size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
+                  Search
+                </button>
+              </div>
+            </form>
+
+            <button
+              onClick={handleReset}
+              className="font-bold rounded-md px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000"
+            >
+              <span className="absolute bg-whiteM  size-36 rounded-full group-hover:scale-100 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
+              <span className="absolute bg-lgreenM size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
+              Reset
+            </button>
           </div>
-        ))}
+        </div>
+        <div className="grid mt-10 mb-10 md:mb-20 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {foods.map((food) => (
+            <AllFoodCard food={food} key={food._id}></AllFoodCard>
+          ))}
+        </div>
       </div>
     </div>
   );

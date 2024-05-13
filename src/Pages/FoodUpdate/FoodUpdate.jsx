@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Spinner from "../../components/Spinner";
 
 const FoodUpdate = () => {
   const axiosSecure = useAxiosSecure();
@@ -54,7 +55,7 @@ const FoodUpdate = () => {
     return data;
   };
 
-  if (isLoading) return <p>Data is still loading....</p>;
+  if (isLoading) return <Spinner></Spinner>;
 
   return (
     <div>

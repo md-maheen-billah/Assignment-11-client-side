@@ -13,12 +13,13 @@ import MyAdded from "../Pages/MyAdded/MyAdded";
 import MyOrdered from "../Pages/MyOrdered/MyOrdered";
 import FoodUpdate from "../Pages/FoodUpdate/FoodUpdate";
 import Gallery from "../Pages/Gallery/Gallery";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
-    // errorElement: <ErrorPage></ErrorPage>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true,

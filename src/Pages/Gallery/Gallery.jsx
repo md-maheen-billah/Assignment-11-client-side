@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Spinner from "../../components/Spinner";
+import bgimg from "../../assets/images/pixlr-image-generator-dabe741d-3a98-4041-98c1-703c5aa92c79.png";
 
 const Gallery = () => {
   const queryClient = useQueryClient();
@@ -60,17 +62,35 @@ const Gallery = () => {
     await mutateAsync({ newFood });
   };
 
-  if (isLoading) return <p>Data is still loading....</p>;
+  if (isLoading) return <Spinner></Spinner>;
 
   return (
     <div>
-      <h2>This is gallery</h2>
-      <div>
+      <div
+        style={{
+          backgroundImage: `linear-gradient(180deg,  rgba(0,0,0,0.1), rgba(0,0,0,1)), url(${bgimg})`,
+        }}
+        className="mt-8 rounded-2xl bg-cover flex justify-center items-center lg:h-56"
+      >
         <div>
+          <h2 className=" text-center font-bold text-2xl md:text-4xl text-whiteM mb-2">
+            Gallery
+          </h2>
+          <p className="text-lgreenM px-4 pb-4 text-center">
+            Indulge in culinary adventures and share your gastronomic
+            experiences in our vibrant food review section, where every bite
+            tells a story.
+          </p>
+        </div>
+      </div>
+      <div>
+        <div className="flex items-center justify-center my-6">
           <button
             onClick={handleModalOpen}
-            className="rounded-md bg-sky-500 px-5 py-[6px] text-white"
+            className="font-bold rounded-md px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000"
           >
+            <span className="absolute bg-whiteM  size-36 rounded-full group-hover:scale-100 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
+            <span className="absolute bg-lgreenM size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
             Add
           </button>
           <div
@@ -79,7 +99,7 @@ const Gallery = () => {
             } inset-0 bg-black/20 backdrop-blur-sm duration-100`}
           >
             <div
-              className={`absolute max-w-md rounded-lg bg-white p-3 pb-5 text-center drop-shadow-2xl dark:bg-gray-800 dark:text-white ${
+              className={`absolute max-w-md rounded-lg bg-greenM p-3 pb-5 text-center drop-shadow-2xl dark:bg-gray-800 dark:text-white ${
                 openModal
                   ? "scale-1 opacity-1 duration-300"
                   : "scale-0 opacity-0 duration-150"
@@ -87,7 +107,7 @@ const Gallery = () => {
             >
               <svg
                 onClick={() => setOpenModal(false)}
-                className="mx-auto mr-0 w-8 cursor-pointer fill-black dark:fill-white"
+                className="mx-auto mr-0 w-8 cursor-pointer fill-goldenM dark:fill-white"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -98,13 +118,12 @@ const Gallery = () => {
                   <path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"></path>
                 </g>
               </svg>
-              <h3 className="font-bold text-lg">Post Your Experience</h3>
+              <h3 className="font-bold text-whiteM text-lg">
+                Post Your Experience
+              </h3>
               <form method="dialog" onSubmit={handleAddExperience}>
-                <div className="mt-2">
-                  <label
-                    className="text-[#1e1b4b] dark:text-[#f9a06f] font-semibold"
-                    htmlFor="name"
-                  >
+                <div className="mt-2 text-left">
+                  <label className="text-whiteM font-semibold" htmlFor="name">
                     User Name:
                   </label>
                   <input
@@ -116,9 +135,9 @@ const Gallery = () => {
                     readOnly
                   />
                 </div>
-                <div className="mt-2">
+                <div className="mt-3 text-left">
                   <label
-                    className="text-[#1e1b4b] dark:text-[#f9a06f] font-semibold"
+                    className="text-whiteM  font-semibold"
                     htmlFor="description"
                   >
                     Experience Description:
@@ -132,11 +151,8 @@ const Gallery = () => {
                     placeholder="Write your Feedback or Experience"
                   />
                 </div>
-                <div>
-                  <label
-                    className="text-[#1e1b4b] dark:text-[#f9a06f] font-semibold"
-                    htmlFor="image"
-                  >
+                <div className="text-left mt-1">
+                  <label className="text-whiteM  font-semibold" htmlFor="image">
                     Image URL:
                   </label>
                   <input
@@ -148,23 +164,24 @@ const Gallery = () => {
                     placeholder="Enter an image URL"
                   />
                 </div>
-
                 <button
                   onClick={() => setOpenModal(false)}
-                  className="btn mt-2"
+                  className="font-bold rounded-md mt-6 px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000"
                 >
-                  Submit
+                  <span className="absolute bg-whiteM  size-36 rounded-full group-hover:scale-100 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
+                  <span className="absolute bg-lgreenM size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
+                  Search
                 </button>
               </form>
             </div>
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-3 mt-8 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 mb-10 md:mb-20 lg:grid-cols-3 mt-8 gap-8">
         {gallery.map((post) => (
           <div key={post._id} className="relative group">
             <img
-              className="object-cover w-full h-full rounded-lg"
+              className="object-cover w-full h-[350px] rounded-lg"
               src={post.image}
               alt=""
             />

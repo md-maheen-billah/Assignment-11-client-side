@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Spinner from "../../components/Spinner";
 
 const FoodPurchase = () => {
   const queryClient = useQueryClient();
@@ -86,7 +87,7 @@ const FoodPurchase = () => {
     return data;
   };
 
-  if (isLoading) return <p>Data is still loading....</p>;
+  if (isLoading) return <Spinner></Spinner>;
   return (
     <div>
       <h2>This is Food Purchase Page</h2>
