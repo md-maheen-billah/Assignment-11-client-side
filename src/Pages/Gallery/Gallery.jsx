@@ -68,12 +68,12 @@ const Gallery = () => {
     <div>
       <div
         style={{
-          backgroundImage: `linear-gradient(180deg,  rgba(0,0,0,0.1), rgba(0,0,0,1)), url(${bgimg})`,
+          backgroundImage: `linear-gradient(180deg,  rgba(0,0,0,0.1), rgba(0,0,0,1)), linear-gradient(360deg,  rgba(0,0,0,0.1), rgba(0,0,0,0.3)),  url(${bgimg})`,
         }}
         className="mt-8 rounded-2xl bg-cover flex justify-center items-center lg:h-56"
       >
         <div>
-          <h2 className=" text-center font-bold text-2xl md:text-4xl text-whiteM mb-2">
+          <h2 className=" text-center pt-2 lg:pt-0 font-bold text-2xl md:text-4xl text-whiteM mb-2">
             Gallery
           </h2>
           <p className="text-lgreenM px-4 pb-4 text-center">

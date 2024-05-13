@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../../components/Spinner";
+import bgimg from "../../assets/images/pixlr-image-generator-5d429792-ac12-4a1c-a6a2-9d98be079a2a.png";
 
 const FoodUpdate = () => {
   const axiosSecure = useAxiosSecure();
@@ -59,189 +60,185 @@ const FoodUpdate = () => {
 
   return (
     <div>
-      <h2>This is Food Add</h2>
-      <form onSubmit={handleUpdate} className="mt-4 space-y-3">
-        <div className="flex flex-col lg:flex-row lg:gap-8 gap-3">
-          <div className="lg:w-1/2">
-            <label
-              className="text-[#1e1b4b] dark:text-[#f9a06f] font-semibold"
-              htmlFor="foodName"
-            >
-              Food Name:
+      <div
+        style={{
+          backgroundImage: `linear-gradient(180deg,  rgba(0,0,0,0.1), rgba(0,0,0,1)), linear-gradient(360deg,  rgba(0,0,0,0.1), rgba(0,0,0,0.3)),  url(${bgimg})`,
+        }}
+        className="mt-8 rounded-2xl bg-cover flex justify-center items-center lg:h-56"
+      >
+        <div>
+          <h2 className=" text-center pt-2 lg:pt-0 font-bold text-2xl md:text-4xl text-whiteM mb-2">
+            Update Food Item
+          </h2>
+          <p className="text-lgreenM px-4 pb-4 text-center">
+            Easily refine and enhance your culinary offerings with our
+            streamlined food item updating section, ensuring every detail.
+          </p>
+        </div>
+      </div>
+      <div className="lg:mt-8 mt-6 mb-10 lg:mb-20">
+        <form onSubmit={handleUpdate} className="mt-4 space-y-3">
+          <div className="flex flex-col lg:flex-row lg:gap-8 gap-3">
+            <div className="lg:w-1/2">
+              <label className="text-whiteM font-semibold" htmlFor="foodName">
+                Food Name:
+              </label>
+              <input
+                className="mt-2  p-2 rounded-md w-full bg-whiteM"
+                type="text"
+                id="foodName"
+                name="foodName"
+                required
+                defaultValue={food.foodName}
+                placeholder="Enter Item Name"
+              />
+            </div>
+            <div className="lg:w-1/2">
+              <label className="text-whiteM font-semibold" htmlFor="foodImage">
+                Image URL:
+              </label>
+              <input
+                className="mt-2  p-2 rounded-md w-full bg-whiteM"
+                type="text"
+                id="foodImage"
+                name="foodImage"
+                defaultValue={food.foodImage}
+                required
+                placeholder="Enter Image URL"
+              />
+            </div>
+          </div>
+          <div className="flex flex-col lg:flex-row lg:gap-8 gap-3">
+            <div className="lg:w-1/2">
+              <label
+                className="text-whiteM  font-semibold"
+                htmlFor="foodCategory"
+              >
+                Food Category:
+              </label>
+              <select
+                className="mt-2   p-2 rounded-md w-full bg-whiteM"
+                id="foodCategory"
+                name="foodCategory"
+                placeholder="Select Subcategory"
+                required
+              >
+                <option value={food.foodCategory}>
+                  {food.foodCategory} (Selected)
+                </option>
+                <option value="Italian">Italian Cuisine</option>
+                <option value="Japanese">Japanese Cuisine</option>
+                <option value="Mexican">Mexican Cuisine</option>
+                <option value="Indian">Indian Cuisine</option>
+                <option value="Mediterranean">Mediterranean Cuisine</option>
+              </select>
+            </div>
+            <div className="lg:w-1/2">
+              <label className="text-whiteM  font-semibold" htmlFor="quantity">
+                Quantity:
+              </label>
+              <input
+                className="mt-2 p-2 rounded-md w-full bg-whiteM"
+                id="quantity"
+                name="quantity"
+                type="number"
+                defaultValue={food.quantity}
+                required
+                placeholder="Enter Quantity"
+              />
+            </div>
+          </div>
+          <div className="flex flex-col lg:flex-row lg:gap-8 gap-3">
+            <div className="lg:w-1/2">
+              <label className="text-whiteM font-semibold" htmlFor="price">
+                Price:
+              </label>
+              <input
+                className="mt-2  p-2 rounded-md w-full bg-whiteM"
+                step=".01"
+                type="number"
+                id="price"
+                name="price"
+                defaultValue={food.price}
+                required
+                placeholder="Enter Price"
+              />
+            </div>
+            <div className="lg:w-1/2">
+              <label className="text-whiteM font-semibold" htmlFor="foodOrigin">
+                Food Origin:
+              </label>
+              <input
+                className="mt-2  p-2 rounded-md w-full bg-whiteM"
+                type="text"
+                id="foodOrigin"
+                name="foodOrigin"
+                defaultValue={food.foodOrigin}
+                required
+                placeholder="Enter Origin Country"
+              />
+            </div>
+          </div>
+          <div className="">
+            <label className="text-whiteM font-semibold" htmlFor="description">
+              Short Description:
             </label>
-            <input
-              className="mt-2 dark:text-black p-2 rounded-md w-full bg-[#ffede2]"
+            <textarea
+              className="mt-2  p-2 rounded-md w-full bg-whiteM"
               type="text"
-              id="foodName"
-              name="foodName"
+              id="description"
+              name="description"
+              defaultValue={food.description}
               required
-              defaultValue={food.foodName}
-              placeholder="Enter Item Name"
+              placeholder="Write a Short Description"
             />
           </div>
-          <div className="lg:w-1/2">
-            <label
-              className="text-[#1e1b4b] dark:text-[#f9a06f]  font-semibold"
-              htmlFor="foodImage"
-            >
-              Image URL:
-            </label>
-            <input
-              className="mt-2 dark:text-black p-2 rounded-md w-full bg-[#ffede2]"
-              type="text"
-              id="foodImage"
-              name="foodImage"
-              defaultValue={food.foodImage}
-              required
-              placeholder="Enter Image URL"
-            />
+          <div className="flex flex-col lg:flex-row lg:gap-8 gap-3">
+            <div className="lg:w-1/2">
+              <label className="text-whiteM font-semibold" htmlFor="sellerName">
+                Seller Name:
+              </label>
+              <input
+                className="mt-2  p-2 rounded-md w-full bg-whiteM"
+                type="text"
+                id="sellerName"
+                name="sellerName"
+                required
+                readOnly
+                defaultValue={food.sellerName}
+              />
+            </div>
+            <div className="lg:w-1/2">
+              <label
+                className="text-whiteM font-semibold"
+                htmlFor="sellerEmail"
+              >
+                Seller Email:
+              </label>
+              <input
+                className="mt-2   p-2 rounded-md w-full bg-whiteM"
+                type="email"
+                id="sellerEmail"
+                name="sellerEmail"
+                defaultValue={food.sellerEmail}
+                readOnly
+                required
+                placeholder="Enter Email"
+              />
+            </div>
           </div>
-        </div>
-        <div className="flex flex-col lg:flex-row lg:gap-8 gap-3">
-          <div className="lg:w-1/2">
-            <label
-              className="text-[#1e1b4b] dark:text-[#f9a06f]  font-semibold"
-              htmlFor="foodCategory"
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="font-bold mt-8 rounded-md px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000"
             >
-              Food Category:
-            </label>
-            <select
-              className="mt-2 dark:text-black  p-2 rounded-md w-full bg-[#ffede2]"
-              id="foodCategory"
-              name="foodCategory"
-              placeholder="Select Subcategory"
-              required
-            >
-              <option value={food.foodCategory}>
-                {food.foodCategory} (Selected)
-              </option>
-              <option value="Italian">Italian Cuisine</option>
-              <option value="Japanese">Japanese Cuisine</option>
-              <option value="Mexican">Mexican Cuisine</option>
-              <option value="Indian">Indian Cuisine</option>
-              <option value="Mediterranean">Mediterranean Cuisine</option>
-            </select>
+              <span className="absolute bg-whiteM  size-36 rounded-full group-hover:scale-100 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
+              <span className="absolute bg-lgreenM size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
+              Update Food
+            </button>
           </div>
-          <div className="lg:w-1/2">
-            <label
-              className="text-[#1e1b4b] dark:text-[#f9a06f]  font-semibold"
-              htmlFor="quantity"
-            >
-              Quantity:
-            </label>
-            <input
-              className="mt-2 dark:text-black p-2 rounded-md w-full bg-[#ffede2]"
-              id="quantity"
-              name="quantity"
-              type="number"
-              defaultValue={food.quantity}
-              required
-              placeholder="Enter Quantity"
-            />
-          </div>
-        </div>
-        <div className="flex flex-col lg:flex-row lg:gap-8 gap-3">
-          <div className="lg:w-1/2">
-            <label
-              className="text-[#1e1b4b] dark:text-[#f9a06f] font-semibold"
-              htmlFor="price"
-            >
-              Price:
-            </label>
-            <input
-              className="mt-2 dark:text-black p-2 rounded-md w-full bg-[#ffede2]"
-              step=".01"
-              type="number"
-              id="price"
-              name="price"
-              defaultValue={food.price}
-              required
-              placeholder="Enter Price"
-            />
-          </div>
-          <div className="lg:w-1/2">
-            <label
-              className="text-[#1e1b4b] dark:text-[#f9a06f] font-semibold"
-              htmlFor="foodOrigin"
-            >
-              Food Origin:
-            </label>
-            <input
-              className="mt-2 dark:text-black p-2 rounded-md w-full bg-[#ffede2]"
-              type="text"
-              id="foodOrigin"
-              name="foodOrigin"
-              defaultValue={food.foodOrigin}
-              required
-              placeholder="Enter Origin Country"
-            />
-          </div>
-        </div>
-        <div className="">
-          <label
-            className="text-[#1e1b4b] dark:text-[#f9a06f] font-semibold"
-            htmlFor="description"
-          >
-            Short Description:
-          </label>
-          <textarea
-            className="mt-2 dark:text-black p-2 rounded-md w-full bg-[#ffede2]"
-            type="text"
-            id="description"
-            name="description"
-            defaultValue={food.description}
-            required
-            placeholder="Write a Short Description"
-          />
-        </div>
-        <div className="flex flex-col lg:flex-row lg:gap-8 gap-3">
-          <div className="lg:w-1/2">
-            <label
-              className="text-[#1e1b4b] dark:text-[#f9a06f] font-semibold"
-              htmlFor="sellerName"
-            >
-              Seller Name:
-            </label>
-            <input
-              className="mt-2 dark:text-black p-2 rounded-md w-full bg-[#ffede2]"
-              type="text"
-              id="sellerName"
-              name="sellerName"
-              required
-              readOnly
-              defaultValue={food.sellerName}
-            />
-          </div>
-          <div className="lg:w-1/2">
-            <label
-              className="text-[#1e1b4b] dark:text-[#f9a06f] font-semibold"
-              htmlFor="sellerEmail"
-            >
-              Seller Email:
-            </label>
-            <input
-              className="mt-2 dark:text-black  p-2 rounded-md w-full bg-[#ffede2]"
-              type="email"
-              id="sellerEmail"
-              name="sellerEmail"
-              defaultValue={food.sellerEmail}
-              readOnly
-              required
-              placeholder="Enter Email"
-            />
-          </div>
-        </div>
-        <div className="flex justify-center">
-          <button
-            type="submit"
-            className="font-bold mt-4 animate__animated animate__pulse animate__infinite rounded-md px-4 py-2 bg-[#f9a06f] text-[#1e1b4b] relative overflow-hidden group z-10 hover:text-[#1e1b4b] duration-1000"
-          >
-            <span className="absolute bg-[#ffede2]  size-36 rounded-full group-hover:scale-100 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
-            <span className="absolute bg-[#fac0a1] size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
-            Update Food
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };
