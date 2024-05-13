@@ -96,7 +96,7 @@ const MyOrdered = () => {
                     <tr>
                       <th
                         scope="col"
-                        className="py-3.5 px-4 text-sm font-medium text-greenM text-left rtl:text-right"
+                        className="py-3.5 px-4 lg:pl-16 text-sm font-medium text-greenM text-left rtl:text-right"
                       >
                         <div className="flex items-center w-20 gap-x-3">
                           <span>Food Image</span>
@@ -129,7 +129,7 @@ const MyOrdered = () => {
                         scope="col"
                         className="px-4 py-3.5 text-sm  text-left rtl:text-right font-medium text-greenM "
                       >
-                        Quantity
+                        Ordered
                       </th>
                       <th
                         scope="col"
@@ -146,9 +146,9 @@ const MyOrdered = () => {
                   <tbody className="bg-lgreenM divide-y divide-greenM ">
                     {foods.map((food) => (
                       <tr key={food._id}>
-                        <td className="px-4 py-4 text-sm text-greenM  whitespace-nowrap">
+                        <td className="px-4 py-4 lg:pl-16 text-sm text-greenM  whitespace-nowrap">
                           <img
-                            className="h-20 rounded-full"
+                            className="h-16 rounded-full border-4 border-greenM "
                             src={food.foodImage}
                             alt=""
                           />
