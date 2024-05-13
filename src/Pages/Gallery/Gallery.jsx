@@ -6,6 +6,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../../components/Spinner";
 import bgimg from "../../assets/images/pixlr-image-generator-dabe741d-3a98-4041-98c1-703c5aa92c79.png";
+import { Helmet } from "react-helmet-async";
 
 const Gallery = () => {
   const queryClient = useQueryClient();
@@ -66,6 +67,9 @@ const Gallery = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Gallery</title>
+      </Helmet>
       <div
         style={{
           backgroundImage: `linear-gradient(180deg,  rgba(0,0,0,0.1), rgba(0,0,0,1)), linear-gradient(360deg,  rgba(0,0,0,0.1), rgba(0,0,0,0.3)),  url(${bgimg})`,

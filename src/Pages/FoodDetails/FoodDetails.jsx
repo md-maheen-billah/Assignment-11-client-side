@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../../components/Spinner";
+import { Helmet } from "react-helmet-async";
 
 const FoodDetails = () => {
   const { id } = useParams();
@@ -20,6 +21,9 @@ const FoodDetails = () => {
   if (isLoading) return <Spinner></Spinner>;
   return (
     <div>
+      <Helmet>
+        <title>{food.foodName} Details</title>
+      </Helmet>
       <section className="pb-12 lg:py-20  text-whiteM dark:text-white relative overflow-hidden">
         <div className="container px-4 mx-auto relative">
           <div className="flex flex-col md:flex-row md:gap-12 items-center justify-between">

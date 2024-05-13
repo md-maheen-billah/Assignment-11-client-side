@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import bgimg from "../../assets/images/pixlr-image-generator-f6eccbee-e8bc-41b6-8ce3-717b86291580.png";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const FoodAdd = () => {
   const { user } = useAuth();
@@ -48,6 +49,9 @@ const FoodAdd = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Add A Food Item</title>
+      </Helmet>
       <div
         style={{
           backgroundImage: `linear-gradient(180deg,  rgba(0,0,0,0.1), rgba(0,0,0,1)), linear-gradient(360deg,  rgba(0,0,0,0.1), rgba(0,0,0,0.3)),  url(${bgimg})`,

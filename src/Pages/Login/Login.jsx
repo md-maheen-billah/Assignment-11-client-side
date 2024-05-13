@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const axiosSecure = useAxiosSecure();
@@ -56,6 +57,9 @@ const Login = () => {
   // if (user || loading) return;
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-lgreenM rounded-lg shadow-lg  lg:max-w-4xl ">
         <div
           className="hidden bg-cover bg-center lg:block lg:w-1/2"

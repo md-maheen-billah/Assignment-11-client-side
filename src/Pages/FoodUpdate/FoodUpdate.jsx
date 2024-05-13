@@ -4,6 +4,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../../components/Spinner";
 import bgimg from "../../assets/images/pixlr-image-generator-5d429792-ac12-4a1c-a6a2-9d98be079a2a.png";
+import { Helmet } from "react-helmet-async";
 
 const FoodUpdate = () => {
   const axiosSecure = useAxiosSecure();
@@ -62,6 +63,9 @@ const FoodUpdate = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Update Food Item</title>
+      </Helmet>
       <div
         style={{
           backgroundImage: `linear-gradient(180deg,  rgba(0,0,0,0.1), rgba(0,0,0,1)), linear-gradient(360deg,  rgba(0,0,0,0.1), rgba(0,0,0,0.3)),  url(${bgimg})`,

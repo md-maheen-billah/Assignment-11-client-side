@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../../components/Spinner";
+import { Helmet } from "react-helmet-async";
 
 const FoodPurchase = () => {
   const queryClient = useQueryClient();
@@ -92,6 +93,9 @@ const FoodPurchase = () => {
   if (isLoading) return <Spinner></Spinner>;
   return (
     <div>
+      <Helmet>
+        <title>{food.foodName} Purchase</title>
+      </Helmet>
       <div
         style={{
           backgroundImage: `linear-gradient(180deg,  rgba(0,0,0,0.1), rgba(0,0,0,1)), linear-gradient(360deg,  rgba(0,0,0,0.1), rgba(0,0,0,0.3)),  url(${food.foodImage})`,

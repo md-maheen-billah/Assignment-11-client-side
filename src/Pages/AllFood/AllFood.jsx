@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import bgimg from "../../assets/images/pixlr-image-generator-506d4a2c-018d-457b-8b62-25cfb6920911.png";
 import Spinner from "../../components/Spinner";
 import AllFoodCard from "./AllFoodCard";
+import { Helmet } from "react-helmet-async";
 
 const AllFood = () => {
   const axiosSecure = useAxiosSecure();
@@ -33,6 +34,9 @@ const AllFood = () => {
   if (isLoading) return <Spinner></Spinner>;
   return (
     <div>
+      <Helmet>
+        <title>All Food</title>
+      </Helmet>
       <div
         style={{
           backgroundImage: `linear-gradient(180deg,  rgba(0,0,0,0.1), rgba(0,0,0,1)), linear-gradient(360deg,  rgba(0,0,0,0.1), rgba(0,0,0,0.3)),  url(${bgimg})`,

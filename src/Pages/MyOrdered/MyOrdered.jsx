@@ -4,6 +4,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../../components/Spinner";
 import bgimg from "../../assets/images/pixlr-image-generator-0913be1d-b5f4-429f-9d38-cb44e9bec89f.png";
+import { Helmet } from "react-helmet-async";
 
 const MyOrdered = () => {
   const axiosSecure = useAxiosSecure();
@@ -70,6 +71,9 @@ const MyOrdered = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>My Ordered Food Items</title>
+      </Helmet>
       <div
         style={{
           backgroundImage: `linear-gradient(180deg,  rgba(0,0,0,0.1), rgba(0,0,0,1)),linear-gradient(360deg,  rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url(${bgimg})`,

@@ -6,6 +6,7 @@ import Spinner from "../../components/Spinner";
 import Banner from "./Banner";
 import Offer from "./Offer";
 import RoadMap from "./RoadMap";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const axiosSecure = useAxiosSecure();
@@ -23,6 +24,9 @@ const Home = () => {
   if (isLoading) return <Spinner></Spinner>;
   return (
     <div className="">
+      <Helmet>
+        <title>Savor Oasis</title>
+      </Helmet>
       <Banner></Banner>
       <section className="lg:mt-16 mt-4 ">
         <div className="my-8">
