@@ -7,7 +7,7 @@ const Banner = () => {
     {
       img: "https://i.ibb.co/L0HCPZR/9bc48fea-7577-4823-a60e-0fb49614006b.jpg",
       title: "Savor Delights",
-      des: "Discover culinary marvels. Indulge in a world of flavorful experience.",
+      des: "Discover culinary marvels. Indulge in a world of flavor.",
     },
     {
       img: "https://i.ibb.co/2vdn13m/9fd16e3b-34bb-4d2b-bc7c-de9251ab25d6.jpg",
@@ -61,7 +61,7 @@ const Banner = () => {
       {/* arrow */}
       <button
         onClick={nextSlider}
-        className="absolute flex justify-center  items-center left-2 bottom-2   rounded-full z-50 w-6 h-6 md:w-8 md:h-8 bgWhite "
+        className="absolute flex justify-center  items-center right-2 bottom-1/2 rounded-full z-50 w-6 h-6 md:w-8 md:h-8 bgWhite "
       >
         <svg
           viewBox="0 0 1024 1024"
@@ -86,16 +86,16 @@ const Banner = () => {
       </button>
 
       {/* text container here */}
-      <div className="w-1/2 pl-2 md:pl-4 lg:px-8 left-0 absolute drop-shadow-lg text-white rounded-lg">
-        <h1 className="lg:text-4xl font-bold text-whiteM mb-3">
+      <div className="md:w-1/2 w-44 pl-2 md:pl-4 lg:px-8 left-0 absolute drop-shadow-lg text-white rounded-lg">
+        <h1 className="lg:text-4xl text-lg font-bold text-whiteM mb-3">
           {sliders[currentSlider].title}
         </h1>
-        <p className="text-xs sm:text-sm text-whiteM md:text-base lg:text-lg">
+        <p className="text-base text-whiteM md:text-base lg:text-lg">
           {sliders[currentSlider].des}
         </p>
         <div className="flex justify-start mt-4">
           <Link to={`/all-food`}>
-            <button className="font-bold rounded-md text-sm md:text-base lg:px-4 px-2 py-1 lg:py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000">
+            <button className="font-bold rounded-md text-sm md:text-base  px-4 py-2  bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000">
               <span className="absolute bg-whiteM  size-36 rounded-full group-hover:scale-100 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
               <span className="absolute bg-lgreenM size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
               Explore
@@ -104,7 +104,7 @@ const Banner = () => {
         </div>
       </div>
       {/* slider container */}
-      <div className="w-1/2 ml-auto overflow-hidden  absolute -right-5 lg:-right-4 z-50 px-4 py-10">
+      <div className="w-1/2 ml-auto overflow-hidden  absolute -right-5 lg:-right-4 z-10 px-4 py-10">
         <div
           className="ease-linear duration-300 flex gap-4 items-center"
           style={{

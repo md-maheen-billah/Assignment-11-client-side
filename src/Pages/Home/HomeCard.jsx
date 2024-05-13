@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const HomeCard = ({ food }) => {
   return (
-    <div className="max-[350px] mx-auto space-y-6 rounded-2xl bg-goldenM px-6 py-4 shadow-md dark:bg-[#18181B] md:w-[350px]">
+    <div className="max-[350px] lg:hover:scale-105 transition mx-auto space-y-6 rounded-2xl bg-goldenM px-6 py-4 shadow-md dark:bg-[#18181B] md:w-[350px]">
       {/* Card Image */}
       <img
         height={190}

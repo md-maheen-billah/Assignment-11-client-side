@@ -4,6 +4,7 @@ import HomeCard from "./HomeCard";
 import { Link } from "react-router-dom";
 import Spinner from "../../components/Spinner";
 import Banner from "./Banner";
+import Offer from "./Offer";
 
 const Home = () => {
   const axiosSecure = useAxiosSecure();
@@ -22,9 +23,9 @@ const Home = () => {
   return (
     <div className="">
       <Banner></Banner>
-      <section className="lg:mt-16 mt-4 mb-10 lg:mb-20">
-        <div className="my-6">
-          <h2 className="text-center font-bold text-3xl text-whiteM mb-2">
+      <section className="lg:mt-16 mt-4 ">
+        <div className="my-8">
+          <h2 className="text-center font-bold text-4xl text-whiteM mb-4">
             Top Foods Section
           </h2>
           <p className="text-lgreenM text-center mx-auto lg:w-8/12">
@@ -53,6 +54,7 @@ const Home = () => {
           </Link>
         </div>
       </section>
+      <Offer></Offer>
     </div>
   );
 };

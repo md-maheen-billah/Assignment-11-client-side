@@ -179,7 +179,10 @@ const Gallery = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 mb-10 md:mb-20 lg:grid-cols-3 mt-8 gap-8">
         {gallery.map((post) => (
-          <div key={post._id} className="relative group">
+          <div
+            key={post._id}
+            className="relative lg:hover:scale-105 transition group"
+          >
             <img
               className="object-cover w-full h-[350px] rounded-lg"
               src={post.image}
