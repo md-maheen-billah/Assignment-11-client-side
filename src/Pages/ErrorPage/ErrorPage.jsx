@@ -7,11 +7,11 @@ const ErrorPage = () => {
           {/* <h2 className="mb-8 font-extrabold text-9xl text-goldenM">
             <span className="sr-only">Error</span>404
           </h2> */}
-          <img src={giff} alt="" />
-          <p className="text-2xl top-80 absolute font-semibold md:text-3xl text-whiteM">
+          <img className="w-8/12 mx-auto" src={giff} alt="" />
+          <p className="text-2xl md:top-60 md:absolute font-semibold md:text-3xl text-whiteM">
             Sorry, we couldn&#39;t find this page.
           </p>
-          <p className=" mb-8 text-lgreenM">
+          <p className="mt-4 md:mt-0 lg:mb-4 text-lgreenM">
             But don&#39;t worry, you can find plenty of other things on our
             homepage.
           </p>
@@ -19,7 +19,7 @@ const ErrorPage = () => {
             <button className="font-bold mt-6 rounded-md px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-0 hover:text-greenM duration-1000">
               <span className="absolute bg-whiteM  size-80 rounded-full group-hover:scale-150 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
               <span className="absolute bg-lgreenM size-80 -left-2 -top-10 rounded-full group-hover:scale-150 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
-              Back to Home Page
+              Home Page
             </button>
           </a>
         </div>
