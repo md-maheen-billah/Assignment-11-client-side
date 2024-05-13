@@ -1,7 +1,7 @@
 const RoadMap = () => {
   return (
     <div>
-      <div className="my-8 lg:mt-16">
+      <div className="my-10 lg:mt-20">
         <h2 className="text-center font-bold text-4xl text-whiteM mb-4">
           Our Roadmap
         </h2>

@@ -8,7 +8,7 @@ const Register = () => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const location = useLocation();
-  const { createUser, updateUserProfile, user, setUser, loading } = useAuth();
+  const { createUser, updateUserProfile, user, setUser } = useAuth();
   const from = location.state || "/";
   useEffect(() => {
     if (user) {
@@ -44,7 +44,8 @@ const Register = () => {
       toast.error(err?.message);
     }
   };
-  if (user || loading) return;
+
+  // if (user || loading) return;
 
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">

@@ -27,7 +27,7 @@ const Banner = () => {
     {
       img: "https://i.ibb.co/N2JVbhQ/b1956b67-99d2-4712-9aca-3822e87939a5.jpg",
       title: "Flavorful Finds",
-      des: "Find culinary treasures. Delightful feelings in every single bite.",
+      des: "Find culinary treasures. Delightful feelings in every bite.",
     },
   ];
   const nextSlider = () =>
@@ -86,7 +86,7 @@ const Banner = () => {
       </button>
 
       {/* text container here */}
-      <div className="md:w-1/2 w-44 pl-2 md:pl-4 lg:px-8 left-0 absolute drop-shadow-lg text-white rounded-lg">
+      <div className="md:w-1/2 w-44 pl-4 lg:px-8 left-0 absolute drop-shadow-lg text-white rounded-lg">
         <h1 className="lg:text-4xl text-lg font-bold text-whiteM mb-3">
           {sliders[currentSlider].title}
         </h1>

@@ -115,12 +115,13 @@ const Offer = () => {
             </svg>
             <div className="ml-3">
               <dt className="text-lg text-redM font-medium">
-                Customized Dining Experience
+                Customized Dining
               </dt>
               <dd className="mt-2 text-lgreenM">
                 Your satisfaction is our priority, which is why we offer
                 customizable options to cater to your specific preferences and
-                dietary needs. Whether you are vegan, gluten-free.
+                dietary needs. Whether you are vegan, gluten-free or have other
+                dietary restrictions.
               </dd>
             </div>
           </div>
