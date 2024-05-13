@@ -4,8 +4,14 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import bgimg from "../../assets/images/pixlr-image-generator-f6eccbee-e8bc-41b6-8ce3-717b86291580.png";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
+import Aos from "aos";
+import { Bounce } from "react-awesome-reveal";
 
 const FoodAdd = () => {
+  useEffect(() => {
+    Aos.init({ duration: 700 });
+  }, []);
   const { user } = useAuth();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
@@ -48,7 +54,7 @@ const FoodAdd = () => {
     }
   };
   return (
-    <div>
+    <div data-aos="fade-up">
       <Helmet>
         <title>Add A Food Item</title>
       </Helmet>
@@ -60,7 +66,7 @@ const FoodAdd = () => {
       >
         <div>
           <h2 className=" text-center pt-2 lg:pt-0 font-bold text-2xl md:text-4xl text-whiteM mb-2">
-            Add A Food Item
+            <Bounce>Add A Food Item</Bounce>
           </h2>
           <p className="text-lgreenM px-4 pb-4 text-center">
             Share your culinary masterpieces with the world in our dedicated
@@ -68,7 +74,7 @@ const FoodAdd = () => {
           </p>
         </div>
       </div>
-      <div className="lg:mt-8 mt-6 mb-10 lg:mb-20">
+      <div data-aos="fade-up" className="lg:mt-8 mt-6 mb-10 lg:mb-20">
         <form onSubmit={handleAddFood} className="mt-4 space-y-3">
           <div className="flex flex-col lg:flex-row lg:gap-8 gap-3">
             <div className="lg:w-1/2">
@@ -213,7 +219,7 @@ const FoodAdd = () => {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="font-bold mt-8 rounded-md px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000"
+              className="font-bold mt-8 animate__animated animate__pulse animate__infinite rounded-md px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000"
             >
               <span className="absolute bg-whiteM  size-36 rounded-full group-hover:scale-100 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
               <span className="absolute bg-lgreenM size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>

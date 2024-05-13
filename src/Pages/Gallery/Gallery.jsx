@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -7,8 +7,13 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../../components/Spinner";
 import bgimg from "../../assets/images/pixlr-image-generator-dabe741d-3a98-4041-98c1-703c5aa92c79.png";
 import { Helmet } from "react-helmet-async";
+import Aos from "aos";
+import { Bounce } from "react-awesome-reveal";
 
 const Gallery = () => {
+  useEffect(() => {
+    Aos.init({ duration: 700 });
+  }, []);
   const queryClient = useQueryClient();
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
@@ -66,7 +71,7 @@ const Gallery = () => {
   if (isLoading) return <Spinner></Spinner>;
 
   return (
-    <div>
+    <div data-aos="fade-up">
       <Helmet>
         <title>Gallery</title>
       </Helmet>
@@ -78,7 +83,7 @@ const Gallery = () => {
       >
         <div>
           <h2 className=" text-center pt-2 lg:pt-0 font-bold text-2xl md:text-4xl text-whiteM mb-2">
-            Gallery
+            <Bounce>Gallery</Bounce>
           </h2>
           <p className="text-lgreenM px-4 pb-4 text-center">
             Indulge in culinary adventures and share your gastronomic
@@ -91,7 +96,7 @@ const Gallery = () => {
         <div className="flex items-center justify-center my-6">
           <button
             onClick={handleModalOpen}
-            className="font-bold rounded-md px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000"
+            className="font-bold rounded-md animate__animated animate__pulse animate__infinite px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000"
           >
             <span className="absolute bg-whiteM  size-36 rounded-full group-hover:scale-100 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
             <span className="absolute bg-lgreenM size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
@@ -181,7 +186,10 @@ const Gallery = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 mb-10 md:mb-20 lg:grid-cols-3 mt-8 gap-8">
+      <div
+        data-aos="fade-up"
+        className="grid grid-cols-1 md:grid-cols-2 mb-10 md:mb-20 lg:grid-cols-3 mt-8 gap-8"
+      >
         {gallery.map((post) => (
           <div
             key={post._id}

@@ -5,8 +5,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../../components/Spinner";
 import bgimg from "../../assets/images/pixlr-image-generator-0913be1d-b5f4-429f-9d38-cb44e9bec89f.png";
 import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
+import Aos from "aos";
+import { Bounce } from "react-awesome-reveal";
 
 const MyOrdered = () => {
+  useEffect(() => {
+    Aos.init({ duration: 700 });
+  }, []);
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const queryClient = useQueryClient();
@@ -70,7 +76,7 @@ const MyOrdered = () => {
   if (isLoading) return <Spinner></Spinner>;
 
   return (
-    <div>
+    <div data-aos="fade-up">
       <Helmet>
         <title>My Ordered Food Items</title>
       </Helmet>
@@ -82,7 +88,7 @@ const MyOrdered = () => {
       >
         <div>
           <h2 className=" text-center pt-2 lg:pt-0 font-bold text-2xl md:text-4xl text-whiteM mb-2">
-            My Ordered Food Items
+            <Bounce>My Ordered Food Items</Bounce>
           </h2>
           <p className="text-lgreenM px-4 pb-4 text-center">
             Manage your ordered delicacies with our intuitive food item
@@ -90,7 +96,10 @@ const MyOrdered = () => {
           </p>
         </div>
       </div>
-      <section className="container px-4 mx-auto pt-2 lg:pt-6">
+      <section
+        data-aos="fade-up"
+        className="container px-4 mx-auto pt-2 lg:pt-6"
+      >
         <div className="flex flex-col mt-6 mb-10 lg:mb-20">
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -190,7 +199,7 @@ const MyOrdered = () => {
                                   food.quantityBought
                                 )
                               }
-                              className="text-greenM transition-colors duration-200   hover:text-redM focus:outline-none"
+                              className="text-greenM animate__animated animate__pulse animate__infinite transition-colors duration-200   hover:text-redM focus:outline-none"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"

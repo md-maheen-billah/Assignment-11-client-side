@@ -3,8 +3,14 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../../components/Spinner";
 import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
+import Aos from "aos";
+import { Bounce } from "react-awesome-reveal";
 
 const FoodDetails = () => {
+  useEffect(() => {
+    Aos.init({ duration: 700 });
+  }, []);
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
 
@@ -20,7 +26,7 @@ const FoodDetails = () => {
 
   if (isLoading) return <Spinner></Spinner>;
   return (
-    <div>
+    <div data-aos="fade-up">
       <Helmet>
         <title>{food.foodName} Details</title>
       </Helmet>
@@ -29,7 +35,7 @@ const FoodDetails = () => {
           <div className="flex flex-col md:flex-row md:gap-12 items-center justify-between">
             <div className="w-full md:w-1/2   md:text-start my-12">
               <h2 className="text-3xl leading-none md:text-[45px] font-bold mb-6">
-                {food.foodName}
+                <Bounce>{food.foodName}</Bounce>
               </h2>
               <div className="flex items-center gap-4">
                 <img
@@ -60,7 +66,7 @@ const FoodDetails = () => {
               </p>
               <div className="mt-8">
                 <Link to={`/food-purchase/${food._id}`}>
-                  <button className="font-bold rounded-md px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000">
+                  <button className="font-bold animate__animated animate__pulse animate__infinite rounded-md px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000">
                     <span className="absolute bg-whiteM  size-36 rounded-full group-hover:scale-100 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
                     <span className="absolute bg-lgreenM size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
                     Purchase
@@ -68,7 +74,7 @@ const FoodDetails = () => {
                 </Link>
               </div>
             </div>
-            <div className="w-full md:w-1/2">
+            <div data-aos="fade-up" className="w-full md:w-1/2">
               <img
                 src={food.foodImage}
                 alt=""

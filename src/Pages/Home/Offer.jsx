@@ -1,10 +1,17 @@
+import Aos from "aos";
+import { useEffect } from "react";
+import { Bounce } from "react-awesome-reveal";
+
 const Offer = () => {
+  useEffect(() => {
+    Aos.init({ duration: 700 });
+  }, []);
   return (
-    <div className="">
+    <div data-aos="fade-up" className="">
       <div className="px-4 pt-4 pb-10 lg:pt-4 lg:pb-16 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="my-8">
           <h2 className="text-center font-bold text-4xl text-whiteM mb-4">
-            What We Offer
+            <Bounce>What We Offer</Bounce>
           </h2>
           <p className="text-lgreenM text-center mx-auto lg:w-8/12">
             An exquisite array of gastronomic delights, crafted with passion and

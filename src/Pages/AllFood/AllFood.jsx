@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import bgimg from "../../assets/images/pixlr-image-generator-506d4a2c-018d-457b-8b62-25cfb6920911.png";
 import Spinner from "../../components/Spinner";
 import AllFoodCard from "./AllFoodCard";
 import { Helmet } from "react-helmet-async";
+import Aos from "aos";
+import "aos/dist/aos.css";
+import { Bounce } from "react-awesome-reveal";
 
 const AllFood = () => {
+  useEffect(() => {
+    Aos.init({ duration: 700 });
+  }, []);
   const axiosSecure = useAxiosSecure();
   const [search, setSearch] = useState("");
   const [searchText, setSearchText] = useState("");
@@ -33,7 +39,7 @@ const AllFood = () => {
 
   if (isLoading) return <Spinner></Spinner>;
   return (
-    <div>
+    <div data-aos="fade-up">
       <Helmet>
         <title>All Food</title>
       </Helmet>
@@ -45,7 +51,7 @@ const AllFood = () => {
       >
         <div>
           <h2 className=" text-center pt-2 lg:pt-0 font-bold text-2xl md:text-4xl text-whiteM mb-2">
-            All Food
+            <Bounce>All Food</Bounce>
           </h2>
           <p className="text-lgreenM px-4 pb-4 text-center">
             Explore a world of flavors with our diverse selection of
@@ -67,7 +73,7 @@ const AllFood = () => {
                   placeholder="Enter Food Name"
                   aria-label="Enter Food Name"
                 />
-                <button className="font-bold rounded-md px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000">
+                <button className="font-bold animate__animated animate__pulse animate__infinite rounded-md px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000">
                   <span className="absolute bg-whiteM  size-36 rounded-full group-hover:scale-100 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
                   <span className="absolute bg-lgreenM size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
                   Search

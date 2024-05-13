@@ -5,8 +5,14 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../../components/Spinner";
 import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
+import Aos from "aos";
+import { Bounce } from "react-awesome-reveal";
 
 const FoodPurchase = () => {
+  useEffect(() => {
+    Aos.init({ duration: 700 });
+  }, []);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -92,7 +98,7 @@ const FoodPurchase = () => {
 
   if (isLoading) return <Spinner></Spinner>;
   return (
-    <div>
+    <div data-aos="fade-up">
       <Helmet>
         <title>{food.foodName} Purchase</title>
       </Helmet>
@@ -104,7 +110,7 @@ const FoodPurchase = () => {
       >
         <div>
           <h2 className=" text-center pt-2 lg:pt-0 font-bold text-2xl md:text-4xl text-whiteM mb-2">
-            Purchase Item
+            <Bounce>Purchase Item</Bounce>
           </h2>
           <p className="text-lgreenM px-4 pb-4 text-center">
             Please check the following information carefully before proceeding
@@ -112,7 +118,7 @@ const FoodPurchase = () => {
           </p>
         </div>
       </div>
-      <div className="lg:mt-8 mt-6 mb-10 lg:mb-20">
+      <div data-aos="fade-up" className="lg:mt-8 mt-6 mb-10 lg:mb-20">
         <form onSubmit={handlePurchase} className="mt-4 space-y-3">
           <div className="flex flex-col lg:flex-row lg:gap-8 gap-3">
             <div className="lg:w-1/2">
@@ -222,7 +228,7 @@ const FoodPurchase = () => {
                 <button
                   type="submit"
                   disabled={food.quantity === 0}
-                  className="font-bold disabled:cursor-not-allowed mt-8 rounded-md px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000"
+                  className="font-bold animate__animated animate__pulse animate__infinite disabled:cursor-not-allowed mt-8 rounded-md px-4 py-2 bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000"
                 >
                   <span className="absolute bg-whiteM  size-36 rounded-full group-hover:scale-100 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
                   <span className="absolute bg-lgreenM size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>

@@ -1,9 +1,16 @@
+import Aos from "aos";
+import { useEffect } from "react";
+import { Bounce } from "react-awesome-reveal";
+
 const RoadMap = () => {
+  useEffect(() => {
+    Aos.init({ duration: 700 });
+  }, []);
   return (
-    <div>
+    <div data-aos="fade-up" className="overflow-x-hidden">
       <div className="my-10 lg:mt-20">
         <h2 className="text-center font-bold text-4xl text-whiteM mb-4">
-          Our Roadmap
+          <Bounce>Our Roadmap</Bounce>
         </h2>
         <p className="text-lgreenM text-center mx-auto lg:w-8/12">
           Outlines our journey towards innovation, growth, and excellence,
@@ -28,7 +35,10 @@ const RoadMap = () => {
               />
             </svg>
           </div>
-          <div className="timeline-end timeline-box bg-whiteM text-greenM">
+          <div
+            data-aos="fade-left"
+            className="timeline-end timeline-box bg-whiteM text-greenM"
+          >
             Foundation Building
           </div>
           <hr className="bg-goldenM" />
@@ -50,7 +60,10 @@ const RoadMap = () => {
               />
             </svg>
           </div>
-          <div className="timeline-start timeline-box bg-whiteM text-greenM">
+          <div
+            data-aos="fade-right"
+            className="timeline-start timeline-box bg-whiteM text-greenM"
+          >
             Market Expansion
           </div>
           <hr />
@@ -72,7 +85,10 @@ const RoadMap = () => {
               />
             </svg>
           </div>
-          <div className="timeline-end timeline-box bg-whiteM text-greenM">
+          <div
+            data-aos="fade-left"
+            className="timeline-end timeline-box bg-whiteM text-greenM"
+          >
             Product Diversification
           </div>
           <hr />
@@ -94,7 +110,10 @@ const RoadMap = () => {
               />
             </svg>
           </div>
-          <div className="timeline-start timeline-box bg-whiteM text-greenM">
+          <div
+            data-aos="fade-right"
+            className="timeline-start timeline-box bg-whiteM text-greenM"
+          >
             Sustainable Growth
           </div>
           <hr />
@@ -116,7 +135,10 @@ const RoadMap = () => {
               />
             </svg>
           </div>
-          <div className="timeline-end timeline-box bg-whiteM text-greenM">
+          <div
+            data-aos="fade-left"
+            className="timeline-end timeline-box bg-whiteM text-greenM"
+          >
             Global Expansion
           </div>
         </li>

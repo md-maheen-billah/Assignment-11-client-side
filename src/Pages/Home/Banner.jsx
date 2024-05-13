@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "animate.css";
 
 const Banner = () => {
   const [currentSlider, setCurrentSlider] = useState(0);
@@ -49,7 +50,7 @@ const Banner = () => {
 
   return (
     <div
-      className="w-full mt-6 lg:mt-12 rounded-2xl h-60 sm:h-96 md:h-[400px] flex flex-col xl:flex-row items-center justify-center gap-5 lg:gap-10 relative bg-cover bg-center before:absolute before:bg-black/40 before:inset-0 transform duration-1000 ease-linear overflow-hidden"
+      className="w-full overflow-x-hidden mt-6 lg:mt-12 rounded-2xl h-60 sm:h-96 md:h-[400px] flex flex-col xl:flex-row items-center justify-center gap-5 lg:gap-10 relative bg-cover bg-center before:absolute before:bg-black/40 before:inset-0 transform duration-1000 ease-linear overflow-hidden"
       style={{
         backgroundImage: `url(${
           currentSlider === 0
@@ -87,7 +88,7 @@ const Banner = () => {
 
       {/* text container here */}
       <div className="md:w-1/2 w-44 pl-4 lg:px-8 left-0 absolute drop-shadow-lg text-white rounded-lg">
-        <h1 className="lg:text-4xl text-lg font-bold text-whiteM mb-3">
+        <h1 className="lg:text-4xl animate__animated animate__headShake  animate__slow animate__infinite text-lg font-bold text-whiteM mb-3">
           {sliders[currentSlider].title}
         </h1>
         <p className="text-base text-whiteM md:text-base lg:text-lg">
@@ -95,7 +96,7 @@ const Banner = () => {
         </p>
         <div className="flex justify-start mt-4">
           <Link to={`/all-food`}>
-            <button className="font-bold rounded-md text-sm md:text-base  px-4 py-2  bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000">
+            <button className="font-bold animate__animated animate__pulse animate__infinite rounded-md text-sm md:text-base  px-4 py-2  bg-goldenM text-greenM relative overflow-hidden group z-10 hover:text-greenM duration-1000">
               <span className="absolute bg-whiteM  size-36 rounded-full group-hover:scale-100 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
               <span className="absolute bg-lgreenM size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
               Explore
