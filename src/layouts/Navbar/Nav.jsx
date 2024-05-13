@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
+import logoN from "../../assets/logo.png";
 
 const Nav = () => {
   const { user, logOut } = useAuth();
@@ -129,7 +130,7 @@ const Nav = () => {
           </ul>
         </div>
         <a className="btn btn-ghost text-greenM text-2xl font-extrabold">
-          Savor Oasis
+          Savor Oasis <img className="h-8" src={logoN} alt="" />
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -148,7 +149,7 @@ const Nav = () => {
                   src={user.photoURL}
                 />
               </summary>
-              <ul className="p-2 shadow mt-6 font-semibold space-y-1 right-2 lg:right-[-55px]  dropdown-content z-[10] bg-goldenM rounded-box w-52">
+              <ul className="p-2 shadow mt-6 text-greenM font-semibold space-y-1 right-2 lg:right-[-55px]  dropdown-content z-[10] bg-goldenM rounded-box w-52">
                 <li>
                   <NavLink
                     to="/my-added-food"
@@ -195,7 +196,7 @@ const Nav = () => {
                   <div className="flex justify-center">
                     <a
                       onClick={handleSignOut}
-                      className="btn font-semibold bg-greenM hover:bg-lgreenM text-whiteM border-none hover:text-greenM"
+                      className="btn w-full font-semibold bg-greenM hover:bg-lgreenM text-whiteM border-none hover:text-greenM"
                     >
                       Sign Out
                     </a>

@@ -142,7 +142,7 @@ const Register = () => {
               to="/login"
               className="text-xs text-greenM uppercase  hover:underline"
             >
-              or Login
+              or Login Here
             </Link>
 
             <span className="w-1/5 border-b border-greenM md:w-1/4"></span>
