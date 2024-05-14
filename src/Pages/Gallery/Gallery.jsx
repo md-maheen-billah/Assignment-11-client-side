@@ -103,7 +103,7 @@ const Gallery = () => {
             Add
           </button>
           <div
-            className={`fixed z-[100] flex items-center justify-center ${
+            className={`fixed z-[100] flex pt-4  lg:pt-24 items-start justify-center ${
               openModal ? "opacity-1 visible" : "invisible opacity-0"
             } inset-0 bg-black/20 backdrop-blur-sm duration-100`}
           >
@@ -179,7 +179,7 @@ const Gallery = () => {
                 >
                   <span className="absolute bg-whiteM  size-36 rounded-full group-hover:scale-100 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
                   <span className="absolute bg-lgreenM size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
-                  Search
+                  Submit
                 </button>
               </form>
             </div>
