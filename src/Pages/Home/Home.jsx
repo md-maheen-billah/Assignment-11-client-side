@@ -10,6 +10,7 @@ import { Helmet } from "react-helmet-async";
 import Aos from "aos";
 import { useEffect } from "react";
 import { Bounce } from "react-awesome-reveal";
+import "animate.css";
 
 const Home = () => {
   useEffect(() => {

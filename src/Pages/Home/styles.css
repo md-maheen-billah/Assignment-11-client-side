@@ -1,0 +1,33 @@
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  color: #000;
+  border-radius: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+.swiper {
+  width: 100%;
+  background: #000;
+  border-radius: 25px;
+}
+
+.swiper-slide {
+  -webkit-box-sizing: border-box;
+}
+
+.parallax-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 130%;
+  height: 100%;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center;
+}
