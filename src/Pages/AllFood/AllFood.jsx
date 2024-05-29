@@ -8,12 +8,14 @@ import { Helmet } from "react-helmet-async";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { Bounce } from "react-awesome-reveal";
+import AllFoodCategory from "./AllFoodCategory";
 
 const AllFood = () => {
   useEffect(() => {
     Aos.init({ duration: 700 });
   }, []);
   const axiosSecure = useAxiosSecure();
+  const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
   const [searchText, setSearchText] = useState("");
 
@@ -25,15 +27,18 @@ const AllFood = () => {
   const handleReset = () => {
     setSearch("");
     setSearchText("");
+    setFilter("");
   };
 
   const { data: foods = [], isLoading } = useQuery({
     queryFn: () => getData(),
-    queryKey: ["allfoods", search],
+    queryKey: ["allfoods", search, filter],
   });
 
   const getData = async () => {
-    const { data } = await axiosSecure(`/allfoods?search=${search}`);
+    const { data } = await axiosSecure(
+      `/allfoods?search=${search}&filter=${filter}`
+    );
     return data;
   };
 
@@ -90,6 +95,12 @@ const AllFood = () => {
               Reset
             </button>
           </div>
+        </div>
+        <div className="flex justify-center items-center">
+          <AllFoodCategory
+            setFilter={setFilter}
+            filter={filter}
+          ></AllFoodCategory>
         </div>
         <div className="grid mt-10 mb-10 md:mb-20 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {foods.map((food) => (
