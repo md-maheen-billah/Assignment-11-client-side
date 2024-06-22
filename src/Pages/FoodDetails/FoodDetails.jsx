@@ -1,13 +1,18 @@
 import { Link, useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Spinner from "../../components/Spinner";
 import { Helmet } from "react-helmet-async";
 import { useEffect } from "react";
 import Aos from "aos";
 import { Bounce } from "react-awesome-reveal";
+import { FaHeart } from "react-icons/fa";
+import { Tooltip } from "react-tooltip";
+import toast from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
 
 const FoodDetails = () => {
+  const { user } = useAuth();
   useEffect(() => {
     Aos.init({ duration: 700 });
   }, []);
@@ -24,6 +29,37 @@ const FoodDetails = () => {
     return data;
   };
 
+  const { mutateAsync } = useMutation({
+    mutationFn: async (fdata) => {
+      const { data } = await axiosSecure.post("/favorites", fdata);
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("Added to Favorites!");
+    },
+  });
+
+  const handleAddFavorite = async () => {
+    const fdata = {
+      name: food.foodName,
+      email: user?.email,
+      sname: food.sellerName,
+      semail: food.sellerEmail,
+      price: food.price,
+      fid: food._id,
+    };
+    try {
+      //   Post request to server
+      await mutateAsync(fdata);
+    } catch (err) {
+      console.log(err);
+      toast.error("Already Added to Favorites");
+    }
+  };
+  useEffect(() => {
+    Aos.init({ duration: 700 });
+  }, []);
+
   if (isLoading) return <Spinner></Spinner>;
   return (
     <div data-aos="fade-up">
@@ -34,9 +70,19 @@ const FoodDetails = () => {
         <div className="container px-4 mx-auto relative">
           <div className="flex flex-col md:flex-row md:gap-12 items-center justify-between">
             <div className="w-full md:w-1/2   md:text-start my-12">
-              <h2 className="text-3xl leading-none md:text-[45px] font-bold mb-6">
-                <Bounce>{food.foodName}</Bounce>
-              </h2>
+              <div className=" flex gap-3 leading-none   mb-6">
+                <h3 className="text-3xl md:text-[45px] font-bold">
+                  <Bounce>{food.foodName}</Bounce>
+                </h3>
+                <Tooltip className="text-xs font-normal" id="my-tooltip" />
+                <button onClick={handleAddFavorite}>
+                  <FaHeart
+                    data-tooltip-id="my-tooltip"
+                    data-tooltip-content="Add to Favorite!"
+                    className="text-xl text-red-500 hover:scale-110"
+                  />
+                </button>
+              </div>
               <div className="flex items-center gap-4">
                 <img
                   className="h-10 rounded-full"

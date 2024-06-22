@@ -198,6 +198,20 @@ const Nav = () => {
                     My ordered food items
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink
+                    to="/favorites"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "text-goldenM focus:text-goldenM focus:bg-greenM bg-greenM border-b-4  border-greenM"
+                        : ""
+                    }
+                  >
+                    Favorites
+                  </NavLink>
+                </li>
 
                 <li className="lg:hidden px-2 pt-2">
                   <a

@@ -14,6 +14,7 @@ import MyOrdered from "../Pages/MyOrdered/MyOrdered";
 import FoodUpdate from "../Pages/FoodUpdate/FoodUpdate";
 import Gallery from "../Pages/Gallery/Gallery";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import Favorites from "../Pages/Favorites/Favorites";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyOrdered></MyOrdered>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/favorites",
+        element: (
+          <PrivateRoute>
+            <Favorites></Favorites>
           </PrivateRoute>
         ),
       },
