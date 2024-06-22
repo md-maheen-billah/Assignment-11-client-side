@@ -9,6 +9,7 @@ import bgimg from "../../assets/images/pixlr-image-generator-dabe741d-3a98-4041-
 import { Helmet } from "react-helmet-async";
 import Aos from "aos";
 import { Bounce } from "react-awesome-reveal";
+import Swal from "sweetalert2";
 
 const Gallery = () => {
   useEffect(() => {
@@ -25,7 +26,11 @@ const Gallery = () => {
     return data;
   };
 
-  const { data: gallery = [], isLoading } = useQuery({
+  const {
+    data: gallery = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryFn: () => getData(),
     queryKey: ["gallery"],
   });
@@ -58,14 +63,57 @@ const Gallery = () => {
     const description = form.description.value;
     const image = form.image.value;
     const name = user.displayName;
+    const email = user.email;
 
     const newFood = {
       image,
       description,
       name,
+      email,
     };
 
     await mutateAsync({ newFood });
+  };
+
+  const { mutateAsync: mutateDelete } = useMutation({
+    mutationFn: async ({ id }) => {
+      const { data } = await axiosSecure.delete(`/gallery/${id}`);
+      return data;
+    },
+    onSuccess: () => {
+      refetch();
+      toast.success("Deleted!");
+    },
+  });
+
+  const deletConfirmed = async (id) => {
+    try {
+      await mutateDelete({ id });
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deletConfirmed(id);
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your entry has been deleted.",
+          icon: "success",
+        });
+      }
+    });
   };
 
   if (isLoading) return <Spinner></Spinner>;
@@ -188,26 +236,48 @@ const Gallery = () => {
       </div>
       <div
         data-aos="fade-up"
-        className="grid grid-cols-1 md:grid-cols-2 mb-10 md:mb-20 lg:grid-cols-3 mt-8 gap-8"
+        className="grid grid-cols-1 md:grid-cols-2 mb-10 md:mb-20 lg:grid-cols-3 mt-8 gap-10"
       >
         {gallery.map((post) => (
-          <div
-            key={post._id}
-            className="relative lg:hover:scale-105 transition group"
-          >
-            <img
-              className="object-cover w-full h-[350px] rounded-lg"
-              src={post.image}
-              alt=""
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center">
-              <div>
-                <p className="text-white text-center px-4">
-                  {post.description}
-                </p>
-                <p className="text-white text-right px-4 mt-4">- {post.name}</p>
+          <div key={post._id} className="relative">
+            <div className="relative lg:hover:scale-105 transition group">
+              <img
+                className="object-cover w-full h-[350px] rounded-lg"
+                src={post.image}
+                alt=""
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center">
+                <div>
+                  <p className="text-white text-center px-4">
+                    {post.description}
+                  </p>
+                  <p className="text-white text-right px-4 mt-4">
+                    - {post.name}
+                  </p>
+                </div>
               </div>
             </div>
+            {post?.email === user?.email && (
+              <button
+                onClick={() => handleDelete(post._id)}
+                className="text-goldenM z-10 -top-6 right-0 absolute animate__animated animate__pulse animate__infinite transition-colors duration-200   hover:text-redM focus:outline-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                  />
+                </svg>
+              </button>
+            )}
           </div>
         ))}
       </div>
